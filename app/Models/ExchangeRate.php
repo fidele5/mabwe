@@ -8,4 +8,12 @@ use Illuminate\Database\Eloquent\Model;
 class ExchangeRate extends Model
 {
     use HasFactory;
+
+    protected $fillable = [
+        "date", 
+        "from_currency",
+        "to_currency",
+        "bid",
+        "ask"
+    ];
 }

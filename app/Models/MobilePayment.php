@@ -8,4 +8,10 @@ use Illuminate\Database\Eloquent\Model;
 class MobilePayment extends Model
 {
     use HasFactory;
+
+    protected $fillable = [
+        "ref",
+        "status",
+        "data"
+    ];
 }
