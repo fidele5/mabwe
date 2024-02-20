@@ -20,7 +20,7 @@ return new class extends Migration
             $table->timestamps();
         });
 
-        Schema::create('company_ads', function (Blueprint $table){
+        Schema::table('company_ads', function (Blueprint $table){
             $table->foreign("company_id")
                 ->references("id")
                 ->on("companies")
