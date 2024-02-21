@@ -45,9 +45,10 @@ class HomeController extends Controller
             ->get();
 
         $videoPosts = VideoPost::with("post_category", "user")
-            ->take(6)
             ->orderBy("id", "DESC")
+            ->take(6)
             ->get();
+
 
         $mostLikedPost->transform(function($post){
             $mostLikedPostCategory = Post::where("post_category_id", $post->post_category_id)

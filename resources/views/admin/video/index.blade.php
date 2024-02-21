@@ -4,14 +4,14 @@
     <div class="content-header-left col-12 mb-2 mt-1">
         <div class="row breadcrumbs-top">
             <div class="col-12">
-                <h5 class="content-header-title float-left pr-1 mb-0">Post categorie</h5>
+                <h5 class="content-header-title float-left pr-1 mb-0">Post</h5>
                 <div class="breadcrumb-wrapper col-12">
                     <ol class="breadcrumb p-0 mb-0">
                         <li class="breadcrumb-item ">
                             <a href="{{ route('home')}}"><i class="bx bx-home-alt"></i></a>
                         </li>
                         <li class="breadcrumb-item active">
-                            Categories
+                            Video
                         </li>
                     </ol>
                 </div>
@@ -26,7 +26,7 @@
         <div class="col-12">
             <div class="card">
                 <div class="card-header">
-                    <h4 class="card-title">Categories</h4>
+                    <h4 class="card-title">Videos</h4>
                 </div>
                 <div class="card-content">
                     <div class="card-body card-dashboard">
@@ -34,21 +34,25 @@
                             <table class="table zero-configuration">
                                 <thead>
                                     <tr>
-                                        <th>Numéro</th>
-                                        <th>Designation</th>
-                                        <th>Action</th>
+                                        <th>Titre</th>
+                                        <th>Caption</th>
+                                        <th>Categorie</th>
+                                        <th>Path</th>
+                                        <th>Actions</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach ($categories as $key=>$category)
+                                    @foreach ($videoPosts as $videoPost)
                                         <tr>
-                                            <td>{{ $key + 1 }}</td>
-                                            <td class="text-truncate" style="max-width: 250px">{{ $category->name }}</td>
+                                            <td class="text-truncate" style="max-width: 200px">{{ $videoPost->title }}</td>
+                                            <td class="text-truncate" style="max-width: 250px">{{ $videoPost->caption }}</td>
+                                            <td>{{ $videoPost->post_category->name }}</td>
+                                            <td><a href="{{ $videoPost->video_path }}" target="_blanc">{{ $videoPost->video_path }}</a></td>
                                             <td>
-                                                <a href="{{ route("post-category.edit", $category) }}">
+                                                <a href="{{ route("video-post.edit", $videoPost) }}">
                                                     <i class="bx bx-edit"></i>
                                                 </a>
-                                                <a class="delete" href="{{ route("post-category.destroy", $category) }}">
+                                                <a class="delete" href="{{ route("video-post.destroy", $videoPost) }}">
                                                     <i class="bx bx-trash"></i>
                                                 </a>
                                             </td>
@@ -57,8 +61,10 @@
                                 </tbody>
                                 <tfoot>
                                     <tr>
-                                        <th>Numéro</th>
-                                        <th>Désignation</th>
+                                        <th>Titre</th>
+                                        <th>Caption</th>
+                                        <th>Categorie</th>
+                                        <th>Path</th>
                                         <th>Actions</th>
                                     </tr>
                                 </tfoot>

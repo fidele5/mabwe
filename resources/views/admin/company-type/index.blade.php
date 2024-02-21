@@ -4,14 +4,14 @@
     <div class="content-header-left col-12 mb-2 mt-1">
         <div class="row breadcrumbs-top">
             <div class="col-12">
-                <h5 class="content-header-title float-left pr-1 mb-0">Post categorie</h5>
+                <h5 class="content-header-title float-left pr-1 mb-0">Type de compagnie</h5>
                 <div class="breadcrumb-wrapper col-12">
                     <ol class="breadcrumb p-0 mb-0">
                         <li class="breadcrumb-item ">
                             <a href="{{ route('home')}}"><i class="bx bx-home-alt"></i></a>
                         </li>
                         <li class="breadcrumb-item active">
-                            Categories
+                            Type de compagnie
                         </li>
                     </ol>
                 </div>
@@ -26,7 +26,7 @@
         <div class="col-12">
             <div class="card">
                 <div class="card-header">
-                    <h4 class="card-title">Categories</h4>
+                    <h4 class="card-title">Type de compagnie</h4>
                 </div>
                 <div class="card-content">
                     <div class="card-body card-dashboard">
@@ -40,15 +40,15 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach ($categories as $key=>$category)
+                                    @foreach ($companyTypes as $key => $companyType)
                                         <tr>
                                             <td>{{ $key + 1 }}</td>
-                                            <td class="text-truncate" style="max-width: 250px">{{ $category->name }}</td>
+                                            <td class="text-truncate" style="max-width: 250px">{{ $companyType->name }}</td>
                                             <td>
-                                                <a href="{{ route("post-category.edit", $category) }}">
+                                                <a href="{{ route("company-type.edit", $companyType) }}">
                                                     <i class="bx bx-edit"></i>
                                                 </a>
-                                                <a class="delete" href="{{ route("post-category.destroy", $category) }}">
+                                                <a class="delete" href="{{ route("company-type.destroy", $companyType) }}">
                                                     <i class="bx bx-trash"></i>
                                                 </a>
                                             </td>

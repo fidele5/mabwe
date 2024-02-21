@@ -12,7 +12,13 @@ class PostCategoryController extends Controller
      */
     public function index()
     {
-        //
+        $categories = PostCategory::get();
+
+        return view("admin.categories.index")->with([
+            "selected_item" => "post-category",
+            "selected_sub_item" => "all",
+            "categories" => $categories
+        ]);
     }
 
     /**
@@ -20,7 +26,10 @@ class PostCategoryController extends Controller
      */
     public function create()
     {
-        //
+        return view("admin.categories.create")->with([
+            "selected_item" => "post-category",
+            "selected_sub_item" => "new",
+        ]);
     }
 
     /**
@@ -28,7 +37,18 @@ class PostCategoryController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request, [
+            'name' => "required"
+        ]);
+
+        $postCategory = new PostCategory();
+        $postCategory->name = $request->name;
+        $postCategory->save();
+
+        return response()->json([
+            "status" => "success",
+            "back" => "post-category"
+        ]);
     }
 
     /**
@@ -44,15 +64,30 @@ class PostCategoryController extends Controller
      */
     public function edit(PostCategory $postCategory)
     {
-        //
+        return view("admin.categories.edit")->with([
+            "selected_item" => "post-category",
+            "selected_sub_item" => "new",
+            'category' => $postCategory
+        ]);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, PostCategory $postCategory)
+    public function update(Request $request, $id)
     {
-        //
+        $this->validate($request, [
+            'name' => "required"
+        ]);
+
+        $postCategory = PostCategory::find($id);
+        $postCategory->name = $request->name;
+        $postCategory->save();
+
+        return response()->json([
+            "status" => "success",
+            "back" => "post-category"
+        ]);
     }
 
     /**
@@ -60,6 +95,10 @@ class PostCategoryController extends Controller
      */
     public function destroy(PostCategory $postCategory)
     {
-        //
+        $postCategory->delete();
+        return response()->json([
+            "status" => "success",
+            "back" => ""
+        ]);
     }
 }

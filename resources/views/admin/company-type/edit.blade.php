@@ -3,14 +3,14 @@
 <div class="content-header-left col-12 mb-2 mt-1">
     <div class="row breadcrumbs-top">
         <div class="col-12">
-            <h5 class="content-header-title float-left pr-1 mb-0">Categories</h5>
+            <h5 class="content-header-title float-left pr-1 mb-0">Type de compagnie</h5>
             <div class="breadcrumb-wrapper col-12">
                 <ol class="breadcrumb p-0 mb-0">
                     <li class="breadcrumb-item ">
                         <a href="{{ route('home')}}"><i class="bx bx-home-alt"></i></a>
                     </li>
                     <li class="breadcrumb-item ">
-                        <a href="{{ route('post-category.index')}}">Catégories d'actualités</a>
+                        <a href="{{ route('company-type.index')}}">{{ $companyType->name }}</a>
                     </li>
                     <li class="breadcrumb-item active">
                         Editer
@@ -26,11 +26,11 @@
         <div class="col-md-9 col-12">
             <div class="card">
                 <div class="card-header text-center">
-                    <h4 class="card-title">Editer une catégorie d'actualités</h4>
+                    <h4 class="card-title">Editer un type de compagnie</h4>
                 </div>
                 <div class="card-content">
                 <div class="card-body">
-                    <form class="form" method="POST" action="{{ route("post-category.update", $category) }}">
+                    <form class="form" method="POST" action="{{ route("company-type.update", $companyType->id) }}">
                         @csrf
                         @method("patch")
                         <div class="form-body">
@@ -38,7 +38,7 @@
                                 <div class="col-12">
                                     <div class="form-group">
                                         <label for="designation">Nom</label>
-                                        <input type="text" id="designation" class="form-control champ" placeholder="Désignation" name="name" value="{{ $category->name }}">
+                                        <input type="text" id="designation" class="form-control champ" placeholder="Nom" name="name" value="{{ $companyType->name }}">
                                     </div>
                                 </div>
                                 <div class="col-12 d-flex justify-content-end">

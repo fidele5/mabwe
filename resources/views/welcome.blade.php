@@ -126,50 +126,6 @@
                             @endif
                         </div>
 
-                        <div class="row">
-                            @if (count($mostLikedPost))
-                                @if (count($mostLikedPost) > 1)    
-                                    <div class="col-md-6">
-                                        <div class="news-post image-post2">
-                                            <div class="post-gallery">
-                                                <img src="/{{ $mostLikedPost[1]->image }}" alt="">
-                                                <div class="hover-box">
-                                                    <div class="inner-hover">
-                                                        <a class="category-post tech" href="tech.html"></a>
-                                                        <h2><a href="single-post.html">{{ $mostLikedPost[1]->title }} </a></h2>
-                                                        <ul class="post-tags">
-                                                            <li><i class="fa fa-clock-o"></i>{{ $mostLikedPost[1]->created_at->diffForHumans() }}</li>
-                                                            <li><i class="fa fa-user"></i>Par <a href="#">{{ $mostLikedPost[1]->user->name }}</a>
-                                                            </li>
-                                                            <li><a href="#"><i
-                                                                        class="fa fa-comments-o"></i><span>{{ $mostLikedPost[1]->comments_count }}</span></a></li>
-                                                            <li><i class="fa fa-eye"></i>872</li>
-                                                        </ul>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <ul class="list-posts">
-                                            @foreach ($mostLikedPost[1] as $post)    
-                                                <li>
-                                                    <img src="/{{ $post->image }}" alt="">
-                                                    <div class="post-content">
-                                                        <a href="travel.html">{{ $post->post_category->name }}</a>
-                                                        <h2><a href="single-post.html">{{ $post->title }}</a></h2>
-                                                        <ul class="post-tags">
-                                                            <li><i class="fa fa-clock-o"></i>{{ $post->created_at->diffForHumans() }}</li>
-                                                        </ul>
-                                                    </div>
-                                                </li>
-                                            @endforeach
-                                        </ul>
-                                    </div>
-                                @endif
-
-                            @endif
-                        </div>
                         <div class="center-button">
                             <a href="#"><i class="fa fa-refresh"></i>Voir plus</a>
                         </div>
@@ -205,14 +161,14 @@
                             @foreach ($videoPosts as $videoPost)    
                                 <div class="col-md-4">
                                     <div class="news-post video-post">
-                                        <img alt="" src="upload/news-posts/video1.jpg">
-                                        <a href="https://www.youtube.com/watch?v=LL59es7iy8Q" class="video-link"><i
+                                        <img alt="" src="/{{ $videoPost->caption }}">
+                                        <a href="{{ $videoPost->video_path }}" class="video-link"><i
                                                 class="fa fa-play-circle-o"></i></a>
                                         <div class="hover-box">
-                                            <h2><a href="single-post.html">Donec odio. Quisque volutpat mattis eros.</a>
+                                            <h2><a href="single-post.html">{{ $videoPost->title }}</a>
                                             </h2>
                                             <ul class="post-tags">
-                                                <li><i class="fa fa-clock-o"></i>27 may 2013</li>
+                                                <li><i class="fa fa-clock-o"></i>{{ $videoPost->created_at->diffForHumans() }}</li>
                                             </ul>
                                         </div>
                                     </div>
