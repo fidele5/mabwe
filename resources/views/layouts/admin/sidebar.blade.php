@@ -139,6 +139,30 @@
                 </ul>
             </li>
 
+            <li class="navigation-header"><span>Compagnies</span></li>
+            <li class="nav-item @if ($selected_item == 'company') active @endif">
+                <a href="page-account-settings.html">
+                    <i class="bx bx-wrench"></i>
+                    <span class="menu-title">Compagnies</span>
+                </a>
+                <ul class="menu-content">
+                    <li @if ($selected_sub_item == 'all' and $selected_item == 'company') class="active" @endif>
+                        <a href="{{ route('company.index') }}">
+                            <i class="bx bx-right-arrow-alt"></i>
+                            <span class="menu-item">Toutes</span>
+                        </a>
+                    </li>
+
+                    <li @if ($selected_sub_item == 'new' and $selected_item == 'company') class="active" @endif>
+                        <a href="{{ route("company.create") }}">
+                            <i class="bx bx-right-arrow-alt"></i>
+                            <span class="menu-item">Nouvelle</span>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+
+
             <li class="navigation-header"><span>Paramètres</span></li>
             <li class="nav-item @if ($selected_item == 'settings') active @endif">
                 <a href="page-account-settings.html">

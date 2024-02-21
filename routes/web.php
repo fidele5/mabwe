@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\CompanyAdController;
+use App\Http\Controllers\CompanyController;
 use App\Http\Controllers\CompanyTypeController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\PostCategoryController;
@@ -33,4 +34,5 @@ Route::prefix("admin")->group(function () {
     Route::resource('post-category', PostCategoryController::class);
     Route::resource('company-type', CompanyTypeController::class);
     Route::resource('settings', SettingController::class);
+    Route::resource('company', CompanyController::class);
 });

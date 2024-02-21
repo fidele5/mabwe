@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Company;
+use App\Models\CompanyType;
 use Illuminate\Http\Request;
 
 class CompanyController extends Controller
@@ -12,7 +13,11 @@ class CompanyController extends Controller
      */
     public function index()
     {
-        //
+        return view("admin.companies.index")->with([
+            "selected_item" => "company",
+            "selected_sub_item" => "all",
+            "companies" => Company::get()
+        ]);
     }
 
     /**
@@ -20,7 +25,11 @@ class CompanyController extends Controller
      */
     public function create()
     {
-        //
+        return view("admin.companies.create")->with([
+            "selected_item" => "company",
+            "selected_sub_item" => "new",
+            "companyTypes" => CompanyType::get()
+        ]);
     }
 
     /**
@@ -28,7 +37,37 @@ class CompanyController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'name' => 'required',
+            'description' => 'required',
+            'company_type_id' => 'required|numeric|exists:company_types,id'
+        ]);
+
+        $company = new Company();
+        $company->name = $request->name;
+        $company->description = $request->description;
+        $company->company_type_id = $request->company_type_id;
+        $company->email = $request->email;
+        $company->phone = $request->phone;
+
+        if ($request->hasFile("logo")) {
+            $file = $request->file('logo');
+
+            $uploadFolder = '/uploads/logo';
+            $filename = \Str::slug($request->name). "-" . \Str::uuid().".".$file->getClientOriginalExtension();
+            $image = $file->storeAs($uploadFolder, $filename);
+
+            $company->logo = $image;
+        }
+
+        $company->address = $request->address;
+        $company->save();
+
+
+        return response()->json([
+            "status" => "success",
+            "back" => "company"
+        ]);
     }
 
     /**
@@ -44,7 +83,12 @@ class CompanyController extends Controller
      */
     public function edit(Company $company)
     {
-        //
+        return view("admin.companies.create")->with([
+            "selected_item" => "company",
+            "selected_sub_item" => "new",
+            "companyTypes" => CompanyType::get(),
+            "company" => $company
+        ]);
     }
 
     /**
@@ -52,7 +96,36 @@ class CompanyController extends Controller
      */
     public function update(Request $request, Company $company)
     {
-        //
+        $request->validate([
+            'name' => 'required',
+            'description' => 'required',
+            'company_type_id' => 'required|numeric|exists:company_types,id'
+        ]);
+
+        $company->name = $request->name;
+        $company->description = $request->description;
+        $company->company_type_id = $request->company_type_id;
+        $company->email = $request->email;
+        $company->phone = $request->phone;
+
+        if ($request->hasFile("logo")) {
+            $file = $request->file('logo');
+
+            $uploadFolder = '/uploads/logo';
+            $filename = \Str::slug($request->name). "-" . \Str::uuid().".".$file->getClientOriginalExtension();
+            $image = $file->storeAs($uploadFolder, $filename);
+
+            $company->logo = $image;
+        }
+
+        $company->address = $request->address;
+        $company->save();
+
+
+        return response()->json([
+            "status" => "success",
+            "back" => "company"
+        ]);
     }
 
     /**
@@ -60,6 +133,10 @@ class CompanyController extends Controller
      */
     public function destroy(Company $company)
     {
-        //
+        $company->delete();
+        return response()->json([
+            "status" => "success",
+            "back" => "company"
+        ]);
     }
 }

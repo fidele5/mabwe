@@ -15,6 +15,10 @@ return new class extends Migration
             $table->id();
             $table->string("name");
             $table->text("description");
+            $table->string("email")->nullable();
+            $table->string("phone")->nullable();
+            $table->string("address")->nullable();
+            $table->string("logo")->nullable();
             $table->unsignedBigInteger("company_type_id");
             $table->softDeletes();
             $table->timestamps();
