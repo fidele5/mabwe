@@ -69,7 +69,7 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand" href="index.html"><img src="images/logo-black.png" alt=""></a>
+                    <a class="navbar-brand" href="index.html"><img src="/images/mabwe_logo.png" width="10%" alt=""></a>
                 </div>
 
                 <div class="advertisement">

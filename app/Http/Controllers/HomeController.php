@@ -14,6 +14,7 @@ class HomeController extends Controller
 {
     public function welcome()  {
         $posts = Post::with("post_category", "user")
+            ->withCount("comments")
             ->take(4)
             ->orderBy("id", "DESC")
             ->get();
@@ -50,7 +51,6 @@ class HomeController extends Controller
 
         $mostLikedPost->transform(function($post){
             $mostLikedPostCategory = Post::where("post_category_id", $post->post_category_id)
-                 ->orderBy("likes", "DESC")
                  ->take("5")
                  ->get();
             $post->posts = $mostLikedPostCategory;
@@ -76,5 +76,12 @@ class HomeController extends Controller
             "todayComments",
             "recentComments"
         ));
+    }
+
+    public function index(){
+        return view("admin.home")->with([
+            "selected_item" => "home",
+            "selected_sub_item" => ""
+        ]);
     }
 }

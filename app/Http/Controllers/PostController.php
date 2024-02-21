@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Post;
+use App\Models\PostCategory;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class PostController extends Controller
 {
@@ -12,7 +14,14 @@ class PostController extends Controller
      */
     public function index()
     {
-        //
+        $posts = Post::with("post_category")
+            ->get();
+
+        return view("admin.actualites.index")->with([
+            "selected_item" => 'post',
+            'selected_sub_item' => 'all',
+            'posts' => $posts
+        ]);
     }
 
     /**
@@ -20,7 +29,13 @@ class PostController extends Controller
      */
     public function create()
     {
-        //
+        $categories = PostCategory::all();
+
+        return view("admin.actualites.create")->with([
+            "selected_item" => 'post',
+            'selected_sub_item' => 'new',
+            'categories' => $categories
+        ]);
     }
 
     /**
@@ -28,7 +43,36 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'image' => 'required|image',
+            'title' => 'required',
+            'text' => 'required',
+            'post_category_id' => 'required|numeric|exists:post_categories,id'
+        ]);
+
+        $post = new Post();
+        $post->title = $request->title;
+        $post->text = $request->text;
+        $post->post_category_id = $request->post_category_id;
+
+        if ($request->hasFile("image")) {
+            $file = $request->file('image');
+
+            $uploadFolder = 'posts';
+            $filename = \Str::slug($request->title). "-" . \Str::uuid().".".$file->getClientOriginalExtension();
+            $image = $file->storeAs($uploadFolder, $filename);
+
+            $post->image = $image;
+        }
+
+        $post->user_id = Auth::user()->id;
+        $post->save();
+
+
+        return response()->json([
+            "status" => "success",
+            "back" => "post"
+        ]);
     }
 
     /**
@@ -36,7 +80,7 @@ class PostController extends Controller
      */
     public function show(Post $post)
     {
-        //
+        
     }
 
     /**
@@ -44,15 +88,50 @@ class PostController extends Controller
      */
     public function edit(Post $post)
     {
-        //
+        $categories = PostCategory::all();
+
+        return view("admin.actualites.edit")->with([
+            "selected_item" => 'post',
+            'selected_sub_item' => '',
+            'categories' => $categories,
+            'post' => $post
+        ]);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Post $post)
+    public function update(Request $request, $id)
     {
-        //
+        $this->validate($request, [
+            'title' => 'required',
+            'text' => 'required',
+            'post_category_id' => 'required|numeric|exists:post_categories,id'
+        ]);
+
+        $post = Post::find($id);
+        $post->user_id = Auth::user()->id;
+        $post->post_category_id = $request->post_category_id;
+        $post->title = $request->title;
+        $post->text = $request->text;
+
+        if ($request->hasFile("image")) {
+            $file = $request->file('image');
+
+            $uploadFolder = 'posts';
+            $filename = \Str::slug($request->title). "-" . \Str::uuid().".".$file->getClientOriginalExtension();
+            $image = $file->storeAs($uploadFolder, $filename);
+
+            $post->image = $image;
+        }
+
+        
+        $post->save();
+
+        return response()->json([
+            "status" => "success",
+            "back" => "post"
+        ]);
     }
 
     /**

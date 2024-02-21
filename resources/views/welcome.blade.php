@@ -7,11 +7,10 @@
     <div class="container">
 
         <div class="ticker-news-box">
-            <span class="breaking-news">breaking news</span>
+            <span class="breaking-news">Flash info</span>
             <ul id="js-news">
                 @foreach ($breakingNews as $post)    
-                    <li class="news-item"><span class="time-news">11:36 pm</span> <a href="#">Lorem ipsum dolor sit amet,
-                            consectetuer adipiscing elit.</a> Donec odio. Quisque volutpat mattis eros... </li>
+                    <li class="news-item"><span class="time-news">11:36 pm</span> <a href="#">{{  $post->title  }}</li>
                 @endforeach
             </ul>
         </div>
@@ -24,16 +23,16 @@
                         @foreach ($posts as $post)    
                             <li>
                                 <div class="news-post image-post">
-                                    <img src="upload/news-posts/h7.jpg" alt="">
+                                    <img src="/{{ $post->image }}" alt="">
                                     <div class="hover-box">
                                         <div class="inner-hover">
-                                            <a class="category-post sport" href="sport.html">Sport</a>
-                                            <h2><a href="single-post.html">Phasellus ultrices nulla quis nibh. Quisque a lectus.
+                                            <a class="category-post sport" href="sport.html">{{ $post->post_category->name }}</a>
+                                            <h2><a href="single-post.html">{{ $post->title }}
                                                 </a></h2>
                                             <ul class="post-tags">
-                                                <li><i class="fa fa-clock-o"></i>27 may 2013</li>
-                                                <li><i class="fa fa-user"></i>by <a href="#">John Doe</a></li>
-                                                <li><a href="#"><i class="fa fa-comments-o"></i><span>23</span></a></li>
+                                                <li><i class="fa fa-clock-o"></i>{{ $post->created_at->diffForHumans() }}</li>
+                                                <li><i class="fa fa-user"></i>Par <a href="#">{{ $post->user->name }}</a></li>
+                                                <li><a href="#"><i class="fa fa-comments-o"></i><span>{{ $post->comments_count }}</span></a></li>
                                                 <li><i class="fa fa-eye"></i>872</li>
                                             </ul>
                                         </div>
@@ -47,16 +46,16 @@
 
             @foreach ($breakingNews as $post)
                 <div class="news-post image-post {{ $loop->first ? 'default-size' : '' }}">
-                    <img src="upload/news-posts/h1.jpg" alt="">
+                    <img src="/{{ $post->image }}" alt="">
                     <div class="hover-box">
                         <div class="inner-hover">
-                            <a class="category-post travel" href="travel.html">travel</a>
-                            <h2><a href="single-post.html">Lorem ipsum dolor sit amet, consectetuer</a></h2>
+                            <a class="category-post travel" href="travel.html">{{ $post->post_category->name }}</a>
+                            <h2><a href="single-post.html">{{ $post->title }}</a></h2>
                             <ul class="post-tags">
-                                <li><i class="fa fa-clock-o"></i><span>27 may 2013</span></li>
-                                <li><a href="#"><i class="fa fa-comments-o"></i><span>23</span></a></li>
+                                <li><i class="fa fa-clock-o"></i><span>{{ $post->created_at->diffForHumans() }}</span></li>
+                                <li><a href="#"><i class="fa fa-comments-o"></i><span>{{ $post->comments_count }}</span></a></li>
                             </ul>
-                            <p>Donec odio. Quisque volutpat mattis eros. Nullam malesuada erat ut turpis.</p>
+                            <p class="text-truncate" style="max-width: 300px">{{ $post->text }}</p>
                         </div>
                     </div>
                 </div>
@@ -81,7 +80,7 @@
                     <div class="grid-box">
 
                         <div class="title-section">
-                            <h1><span>Today's Featured</span></h1>
+                            <h1><span>Publié aujourd'hui</span></h1>
                         </div>
 
                         <div class="row">
@@ -89,18 +88,17 @@
                                 <div class="col-md-6">
                                     <div class="news-post image-post2">
                                         <div class="post-gallery">
-                                            <img src="upload/news-posts/im5.jpg" alt="">
+                                            <img src="/{{ $mostLikedPost[0]->image }}" alt="">
                                             <div class="hover-box">
                                                 <div class="inner-hover">
-                                                    <a class="category-post tech" href="tech.html">Tech</a>
-                                                    <h2><a href="single-post.html">Pellentesque odio nisi, euismod in,
-                                                            pharetra a, ultricies in, diam. </a></h2>
+                                                    <a class="category-post tech" href="tech.html"></a>
+                                                    <h2><a href="single-post.html">{{ $mostLikedPost[0]->title }} </a></h2>
                                                     <ul class="post-tags">
-                                                        <li><i class="fa fa-clock-o"></i>27 may 2013</li>
-                                                        <li><i class="fa fa-user"></i>by <a href="#">John Doe</a>
+                                                        <li><i class="fa fa-clock-o"></i>{{ $mostLikedPost[0]->created_at->diffForHumans() }}</li>
+                                                        <li><i class="fa fa-user"></i>Par <a href="#">{{ $mostLikedPost[0]->user->name }}</a>
                                                         </li>
                                                         <li><a href="#"><i
-                                                                    class="fa fa-comments-o"></i><span>23</span></a></li>
+                                                                    class="fa fa-comments-o"></i><span>{{ $mostLikedPost[0]->comments_count }}</span></a></li>
                                                         <li><i class="fa fa-eye"></i>872</li>
                                                     </ul>
                                                 </div>
@@ -113,13 +111,12 @@
                                     <ul class="list-posts">
                                         @foreach ($mostLikedPost[0]->posts as $post)    
                                             <li>
-                                                <img src="upload/news-posts/list1.jpg" alt="">
+                                                <img src="/{{ $post->image }}" alt="">
                                                 <div class="post-content">
-                                                    <a href="travel.html">travel</a>
-                                                    <h2><a href="single-post.html">Pellentesque odio nisi, euismod in, pharetra
-                                                            a, ultricies in, diam. </a></h2>
+                                                    <a href="travel.html">{{ $post->post_category->name }}</a>
+                                                    <h2><a href="single-post.html">{{ $post->text }}</a></h2>
                                                     <ul class="post-tags">
-                                                        <li><i class="fa fa-clock-o"></i>27 may 2013</li>
+                                                        <li><i class="fa fa-clock-o"></i>{{ $post->created_at->diffForHumans() }}</li>
                                                     </ul>
                                                 </div>
                                             </li>
@@ -131,50 +128,50 @@
 
                         <div class="row">
                             @if (count($mostLikedPost))
-                                <div class="col-md-6">
-                                    <div class="news-post image-post2">
-                                        <div class="post-gallery">
-                                            <img src="upload/news-posts/im6.jpg" alt="">
-                                            <div class="hover-box">
-                                                <div class="inner-hover">
-                                                    <a class="category-post travel" href="travel.html">travel</a>
-                                                    <h2><a href="single-post.html">Pellentesque odio nisi, euismod in,
-                                                            pharetra a, ultricies in, diam. </a></h2>
-                                                    <ul class="post-tags">
-                                                        <li><i class="fa fa-clock-o"></i>27 may 2013</li>
-                                                        <li><i class="fa fa-user"></i>by <a href="#">John Doe</a>
-                                                        </li>
-                                                        <li><a href="#"><i
-                                                                    class="fa fa-comments-o"></i><span>23</span></a></li>
-                                                        <li><i class="fa fa-eye"></i>872</li>
-                                                    </ul>
+                                @if (count($mostLikedPost) > 1)    
+                                    <div class="col-md-6">
+                                        <div class="news-post image-post2">
+                                            <div class="post-gallery">
+                                                <img src="/{{ $mostLikedPost[1]->image }}" alt="">
+                                                <div class="hover-box">
+                                                    <div class="inner-hover">
+                                                        <a class="category-post tech" href="tech.html"></a>
+                                                        <h2><a href="single-post.html">{{ $mostLikedPost[1]->title }} </a></h2>
+                                                        <ul class="post-tags">
+                                                            <li><i class="fa fa-clock-o"></i>{{ $mostLikedPost[1]->created_at->diffForHumans() }}</li>
+                                                            <li><i class="fa fa-user"></i>Par <a href="#">{{ $mostLikedPost[1]->user->name }}</a>
+                                                            </li>
+                                                            <li><a href="#"><i
+                                                                        class="fa fa-comments-o"></i><span>{{ $mostLikedPost[1]->comments_count }}</span></a></li>
+                                                            <li><i class="fa fa-eye"></i>872</li>
+                                                        </ul>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
+                                    <div class="col-md-6">
+                                        <ul class="list-posts">
+                                            @foreach ($mostLikedPost[1] as $post)    
+                                                <li>
+                                                    <img src="/{{ $post->image }}" alt="">
+                                                    <div class="post-content">
+                                                        <a href="travel.html">{{ $post->post_category->name }}</a>
+                                                        <h2><a href="single-post.html">{{ $post->title }}</a></h2>
+                                                        <ul class="post-tags">
+                                                            <li><i class="fa fa-clock-o"></i>{{ $post->created_at->diffForHumans() }}</li>
+                                                        </ul>
+                                                    </div>
+                                                </li>
+                                            @endforeach
+                                        </ul>
+                                    </div>
+                                @endif
 
-                                <div class="col-md-6">
-                                    <ul class="list-posts">
-                                        @foreach ($mostLikedPost[1] as $post)    
-                                            <li>
-                                                <img src="upload/news-posts/list4.jpg" alt="">
-                                                <div class="post-content">
-                                                    <a href="travel.html">travel</a>
-                                                    <h2><a href="single-post.html">Pellentesque odio nisi, euismod in, pharetra
-                                                            a, ultricies in, diam. </a></h2>
-                                                    <ul class="post-tags">
-                                                        <li><i class="fa fa-clock-o"></i>27 may 2013</li>
-                                                    </ul>
-                                                </div>
-                                            </li>
-                                        @endforeach
-                                    </ul>
-                                </div>
                             @endif
                         </div>
                         <div class="center-button">
-                            <a href="#"><i class="fa fa-refresh"></i> More from featured</a>
+                            <a href="#"><i class="fa fa-refresh"></i>Voir plus</a>
                         </div>
 
                     </div>
@@ -201,7 +198,7 @@
                     <div class="grid-box">
 
                         <div class="title-section">
-                            <h1><span class="world">News in Video</span></h1>
+                            <h1><span class="world">Videos</span></h1>
                         </div>
 
                         <div class="row">
@@ -255,26 +252,22 @@
                                     <div class="row">
                                         <div class="col-sm-5">
                                             <div class="post-gallery">
-                                                <img alt="" src="upload/news-posts/art1.jpg">
+                                                <img alt="" src="/{{ $post->image }}">
                                             </div>
                                         </div>
                                         <div class="col-sm-7">
                                             <div class="post-content">
-                                                <h2><a href="single-post.html">Pellentesque odio nisi, euismod in, pharetra a,
-                                                        ultricies in, diam. Sed arcu. Cras consequat.</a></h2>
+                                                <h2><a href="single-post.html">{{ $post->title }}</a></h2>
                                                 <ul class="post-tags">
-                                                    <li><i class="fa fa-clock-o"></i>27 may 2013</li>
-                                                    <li><i class="fa fa-user"></i>by <a href="#">John Doe</a></li>
-                                                    <li><a href="#"><i class="fa fa-comments-o"></i><span>23</span></a>
+                                                    <li><i class="fa fa-clock-o"></i>{{ $post->created_at->diffForHumans() }}</li>
+                                                    <li><i class="fa fa-user"></i>Par <a href="#">{{ $post->user->name }}</a></li>
+                                                    <li><a href="#"><i class="fa fa-comments-o"></i><span>{{ $post->comments_count }}</span></a>
                                                     </li>
                                                     <li><i class="fa fa-eye"></i>872</li>
                                                 </ul>
-                                                <p>Nullam malesuada erat ut turpis. Suspendisse urna nibh, viverra non, semper
-                                                    suscipit, posuere a, pede. Donec nec justo eget felis facilisis fermentum.
-                                                    Aliquam porttitor mauris sit amet orci. Aenean dignissim pellentesque felis.
-                                                </p>
+                                                <p class="text-truncate" style="max-width: 250px">{{ \Str::limit($post->text, 150, "...") }}</p>
                                                 <a href="single-post.html" class="read-more-button"><i
-                                                        class="fa fa-arrow-circle-right"></i>Read More</a>
+                                                        class="fa fa-arrow-circle-right"></i>Lire plus</a>
                                             </div>
                                         </div>
                                     </div>
@@ -352,12 +345,11 @@
                                 <ul class="list-posts">
                                     @foreach ($popularNews as $post)    
                                         <li>
-                                            <img src="upload/news-posts/listw1.jpg" alt="">
+                                            <img src="/{{ $post->image }}" alt="">
                                             <div class="post-content">
-                                                <h2><a href="single-post.html">Pellentesque odio nisi, euismod in, pharetra
-                                                        a, ultricies in, diam. </a></h2>
+                                                <h2><a href="single-post.html">{{ $post->title }}</a></h2>
                                                 <ul class="post-tags">
-                                                    <li><i class="fa fa-clock-o"></i>27 may 2013</li>
+                                                    <li><i class="fa fa-clock-o"></i>{{ $post->created_at->diffForHumans() }}</li>
                                                 </ul>
                                             </div>
                                         </li>
