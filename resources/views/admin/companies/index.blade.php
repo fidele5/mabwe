@@ -54,7 +54,6 @@
                                             <td>{{ $company->email }}</td>
                                             <td>{{ $company->address }}</td>
                                             <td>{{ $company->logo }}</td>
-                                            <td></td>
                                             <td>
                                                 <a href="{{ route("company.edit", $company) }}">
                                                     <i class="bx bx-edit"></i>
