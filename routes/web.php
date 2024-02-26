@@ -32,6 +32,8 @@ Route::get("company/{id}", [HomeController::class, "company"])->name("company");
 Route::get("about", [HomeController::class, "about"])->name("about");
 Route::get("partners", [HomeController::class, "partners"])->name("partners");
 Route::get("contact", [HomeController::class, "contact"])->name("contact");
+Route::post("subscribe", [HomeController::class, "subscribe"])->name("subscribe");
+Route::post("contact-mail", [HomeController::class, "contactMail"])->name("contact-mail");
 
 Auth::routes();
 

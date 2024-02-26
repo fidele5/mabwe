@@ -148,6 +148,23 @@
                             </ul>
                         </div>
 
+                        @if (get_ads()->count())  
+                            <div class="advertisement">
+                                <div class="desktop-advert">
+                                    <span>{{ get_random_ad()["title"] }}</span>
+                                    <img src="/{{ get_random_ad()['landscape_desktop'] }}" alt="">
+                                </div>
+                                <div class="tablet-advert">
+                                    <span>{{ get_random_ad()["title"] }}</span>
+                                    <img src="/{{ get_random_ad()["landscape_tablet"] }}" alt="">
+                                </div>
+                                <div class="mobile-advert">
+                                    <span>{{ get_random_ad()["title"] }}</span>
+                                    <img src="/{{ get_random_ad()["landscape_mobile"] }}" alt="">
+                                </div>
+                            </div>
+                        @endif
+
                         <!-- contact form box -->
                         <div class="contact-form-box">
                             <div class="title-section">
@@ -267,20 +284,22 @@
                         </ul>
                     </div>
 
-                    <div class="advertisement">
-                        <div class="desktop-advert">
-                            <span>Advertisement</span>
-                            <img src="upload/addsense/300x250.jpg" alt="">
+                    @if (get_ads()->count())  
+                        <div class="advertisement">
+                            <div class="desktop-advert">
+                                <span>{{ get_random_ad()["title"] }}</span>
+                                <img src="/{{ get_random_ad()["image_path"] }}" alt="">
+                            </div>
+                            <div class="tablet-advert">
+                                <span>{{ get_random_ad()["title"] }}</span>
+                                <img src="/{{ get_random_ad()["tablet_image"] }}" alt="">
+                            </div>
+                            <div class="mobile-advert">
+                                <span>{{ get_random_ad()["title"] }}</span>
+                                <img src="/{{ get_random_ad()["image_path"] }}" alt="">
+                            </div>
                         </div>
-                        <div class="tablet-advert">
-                            <span>Advertisement</span>
-                            <img src="upload/addsense/200x200.jpg" alt="">
-                        </div>
-                        <div class="mobile-advert">
-                            <span>Advertisement</span>
-                            <img src="upload/addsense/300x250.jpg" alt="">
-                        </div>
-                    </div>
+                    @endif
 
                 </div>
                 <!-- End sidebar -->

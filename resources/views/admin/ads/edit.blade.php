@@ -99,6 +99,39 @@
                                         </fieldset>
                                     </div>
 
+                                    <div class="col-md-12">
+                                        <fieldset class="form-group">
+                                            <label for="basicInputFile">Image desktop paysage  <small class="text-warning text-lowercase text-right" >  <em>728x90 (Obligatoire) *</em> </small> </label>
+                                            <div class="custom-file">
+                                                <input type="file" class="custom-file-input champ @error('landscape_desktop') is-invalid @enderror" name="landscape_desktop" id="inputGroupFile01">
+                                                <label class="custom-file-label" for="inputGroupFile01">Choose file</label>
+                                                <small class="text-danger"></small>
+                                            </div>
+                                        </fieldset>
+                                    </div>
+
+                                    <div class="col-md-12">
+                                        <fieldset class="form-group">
+                                            <label for="basicInputFile">Image tablette paysage  <small class="text-warning text-lowercase text-right" >  <em>468x60 (Obligatoire) *</em> </small> </label>
+                                            <div class="custom-file">
+                                                <input type="file" class="custom-file-input champ @error('landscape_tablet') is-invalid @enderror" name="landscape_tablet" id="inputGroupFile01">
+                                                <label class="custom-file-label" for="inputGroupFile01">Choose file</label>
+                                                <small class="text-danger"></small>
+                                            </div>
+                                        </fieldset>
+                                    </div>
+                                    
+                                    <div class="col-md-12">
+                                        <fieldset class="form-group">
+                                            <label for="basicInputFile">Image mobile paysage  <small class="text-warning text-lowercase text-right" >  <em>300x250 (Obligatoire) *</em> </small> </label>
+                                            <div class="custom-file">
+                                                <input type="file" class="custom-file-input champ @error('image') is-invalid @enderror" name="landscape_mobile" id="inputGroupFile01">
+                                                <label class="custom-file-label" for="inputGroupFile01">Choose file</label>
+                                                <small class="text-danger"></small>
+                                            </div>
+                                        </fieldset>
+                                    </div>
+
                                     <div class="col-12 d-flex justify-content-end">
                                         <button type="submit" class="btn btn-primary mr-1 mb-1">Enregistrer</button>
                                         <button type="reset" class="btn btn-light-secondary mr-1 mb-1">Annuler</button>

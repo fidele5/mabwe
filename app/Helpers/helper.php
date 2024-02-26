@@ -39,12 +39,12 @@ function get_categories(){
 
 function get_ads(){
     return CompanyAd::inRandomOrder()
-        ->whereDate("expire_at", "<=", Carbon::today()->toDateString())
+        ->whereDate("expire_at", ">=", Carbon::today()->toDateString())
         ->get();
 }
 
 function get_random_ad(){
-    $array  = get_ads();
+    $array  = get_ads()->toArray();
     $k = array_rand($array);
     return $array[$k];
 }

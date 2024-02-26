@@ -2,9 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\ContactMail;
+use App\Mail\SubscriptionEmail;
 use App\Models\Comment;
 use App\Models\Company;
 use App\Models\CompanyType;
+use App\Models\MailSubscription;
 use App\Models\Post;
 use App\Models\PostCategory;
 use App\Models\VideoPost;
@@ -12,6 +15,7 @@ use Carbon\Carbon;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Mail;
 
 class HomeController extends Controller
 {
@@ -204,5 +208,60 @@ class HomeController extends Controller
             ->get();
 
         return view("contact")->with(compact("popularNews"));
+    }
+
+    public function subscribe(Request $request){
+        $request->validate([
+            'email' => 'required|email|unique:mail_subscriptions|max:30'
+        ]);
+
+        $token = hash('sha256', time());
+        $subscriber = new MailSubscription();
+        $subscriber->email = $request->email;
+        $subscriber->token = $token;
+        $subscriber->status = 'Pending';
+        $subscriber->save();
+
+        // Send email
+        $subject = 'Veuilliez confirmer votre adresse email';
+        $verification_link = url('subscriber/verify/'.$token.'/'.$request->email);
+        $message = 'Cliquez sur le lien suivant pour verifier votre adresse email: <br><br>';
+
+        $message .= '<a href="'.$verification_link.'">';
+        $message .= $verification_link;
+        $message .= '</a><br><br>';
+
+        Mail::to($request->mail, "fidele")->send(new SubscriptionEmail($message));
+
+        return redirect()->back()->with('success', 'Thanks, please check your inbox to confirm subscription');
+    }
+
+    public function verify($token, $email)
+    {   
+        $subscriber_data = MailSubscription::where('token',$token)->where('email',$email)->first();
+        
+        if($subscriber_data) 
+        {
+            $subscriber_data->token = '';
+            $subscriber_data->status = 'Active';
+            $subscriber_data->update();
+            return redirect()->back()->with('success', 'You are successfully verified as a subscribe to this system');
+        } 
+        else 
+        {
+            return redirect()->route('form');
+        }
+    }
+
+    public function contactMail(Request $request){
+        $request->validate([
+            'email' => 'required|max:30',
+            'name' => 'required',
+            'text' => 'required'
+        ]);
+
+        Mail::to($request->email, $request->name)->send(new ContactMail($request->email, $request->text));
+
+        return back();
     }
 }

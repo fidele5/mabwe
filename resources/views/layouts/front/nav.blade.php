@@ -38,7 +38,7 @@
                                 <span class="cel-temperature">+7</span>
                             </li>
                             <li><span class="time-now">{{ \Carbon\Carbon::now()->isoFormat('LLLL') }}</span></li>
-                            <li><a href="{{ route("contact") }}">Contact</a></li>
+                            <li><a href="{{ route('contact') }}">Contact</a></li>
                         </ul>
                     </div>
                     <div class="col-md-3">
@@ -69,19 +69,23 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand" href="/"><img src="/images/mabwe_logo.png" width="10%" alt=""></a>
+                    <a class="navbar-brand" href="/"><img src="/images/mabwe_logo.png" width="10%"
+                            alt=""></a>
                 </div>
 
-                <div class="advertisement">
-                    <div class="desktop-advert">
-                        <span>Advertisement</span>
-                        <img src="upload/addsense/728x90-white.jpg" alt="">
+                @if (get_ads()->count())
+                    <div class="advertisement">
+                        <div class="desktop-advert">
+                            <span>{{ get_random_ad()['title'] }}</span>
+                            <img src="/{{ get_random_ad()['landscape_desktop'] }}" alt="">
+                        </div>
+                        <div class="tablet-advert">
+                            <span>{{ get_random_ad()['title'] }}</span>
+                            <img src="/{{ get_random_ad()['landscape_tablet'] }}" alt="">
+                        </div>
+
                     </div>
-                    <div class="tablet-advert">
-                        <span>Advertisement</span>
-                        <img src="upload/addsense/468x60-white.jpg" alt="">
-                    </div>
-                </div>
+                @endif
             </div>
         </div>
         <!-- End Logo & advertisement -->
@@ -93,16 +97,17 @@
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                     <ul class="nav navbar-nav navbar-left">
                         <li><a class="home" href="/">Accueil</a></li>
-                        <li><a class="fashion" href="{{ route("posts") }}">Actualités</a></li>
+                        <li><a class="fashion" href="{{ route('posts') }}">Actualités</a></li>
                         <li class="drop"><a class="features" href="#">Site miniers</a>
                             <ul class="dropdown features-dropdown">
                                 @foreach (get_company_types() as $companyType)
-                                    <li><a href="{{ route("companies", $companyType) }}">{{ $companyType->name }}</a></li>
+                                    <li><a href="{{ route('companies', $companyType) }}">{{ $companyType->name }}</a>
+                                    </li>
                                 @endforeach
                             </ul>
                         </li>
-                        <li><a class="sport" href="{{ route("partners") }}">Nos partenaires</a></li>
-                        <li><a class="sport" href="{{ route("about") }}">A propos de nous</a></li>
+                        <li><a class="sport" href="{{ route('partners') }}">Nos partenaires</a></li>
+                        <li><a class="sport" href="{{ route('about') }}">A propos de nous</a></li>
 
                     </ul>
                 </div>
