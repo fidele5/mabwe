@@ -45,7 +45,7 @@ class VideoPostController extends Controller
         $this->validate($request, [
             'post_category_id' => 'required|numeric|exists:post_categories,id',
             'video_path' => 'required|url',
-            'caption' => 'required|image',
+            'caption' => 'required|image|dimensions:max_width=270,max_height=200',
             'title' => 'required'
         ]);
 
@@ -104,7 +104,8 @@ class VideoPostController extends Controller
         $this->validate($request, [
             'post_category_id' => 'required|numeric|exists:post_categories,id',
             'video_path' => 'required|url',
-            'title' => 'required'
+            'title' => 'required',
+            'caption' => 'image|dimensions:max_width=270,max_height=200',
         ]);
 
         $videoPost = VideoPost::find($id);

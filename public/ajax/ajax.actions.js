@@ -319,15 +319,17 @@ $(document).ready(function() {
 
                     $.each(data.responseJSON.errors, function(key, value) {
 
-                        var input = 'form .champ[name=' + key + ']';
+                        var input = 'form [name=' + key + ']';
 
                         $(input).addClass('is-invalid');
 
-                        $(input + " + label + div").html(value[0]);
+                        $(input + " + label + small").html(value[0]);
 
                         $('div.carde').unblock();
 
                     });
+
+                    $('button[type=submit]').removeAttr('disabled').html("Enregistrer");
 
                 }
 

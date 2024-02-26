@@ -36,46 +36,45 @@
                                 <div class="row justify-content-center">
                                     <div class="col-12">
                                         <div class="form-group">
-                                            <label for="first-title-floating">Titre</label>
+                                            <label for="first-title-floating">Titre <small class="text-warning text-lowercase text-right" >  <em>* (obligatoire)</em> </small> </label>
                                             <input type="text" value="{{ old('title')}}" id="first-title-floating" class="form-control champ @error('title') is-invalid @enderror" placeholder="Titre" name="title">
-                                            @error('title')
-                                                <small>{{$message}}</small>
-                                            @enderror
+                                            <small class="text-danger"></small>
                                         </div>
                                     </div>
                                     <div class="col-12">
                                         <div class="form-group">
-                                            <label>Catégorie</label>
+                                            <label>Catégorie <small class="text-warning text-lowercase text-right" >  <em>* (obligatoire)</em> </small></label>
                                             <select name="post_category_id" id="categorie" class="custom-select @error('post_category_id') is-invalid @enderror">
                                                 @foreach ($categories as $categorie)
                                                     <option value="{{ $categorie->id }}" @if(old('categorie') == $categorie->id) selected="" @endif>{{ $categorie->name }}</option>
                                                 @endforeach
-                                                @error('post_category_id')
-                                                    <small>{{ $message }}</small>
-                                                @enderror
+                                                <small class="text-danger"></small>
                                             </select>
                                         </div>
                                     </div>
                                     <div class="col-12">
                                         <fieldset class="form-group mb-0">
-                                            <label for="textarea-counter">Texte</label>
+                                            <label for="textarea-counter">Texte <small class="text-warning text-lowercase text-right" >  <em>* (obligatoire)</em> </small></label>
                                             <textarea data-length=20 class="form-control char-textarea champ @error('text') is-invalid @enderror" id="textarea-counter" rows="5" name="text" placeholder="Texte">{{ old('text')}}</textarea>
-                                            @error('text')
-                                                <small class="text-light-danger">{{ $message }}</small>
-                                            @enderror
+                                            <small class="text-danger"></small>
                                         </fieldset>
                                         <small class="counter-value float-right"><span class="char-count">0</span> / 20 </small>
                                     </div>
 
+                                    <div class="col-12">
+                                        <div class="form-group">
+                                            <label for="first-title-floating">Lien externe</label>
+                                            <input type="url"  id="first-title-floating" class="form-control" placeholder="Lien externe" name="external_link">
+                                        </div>
+                                    </div>
+
                                     <div class="col-md-12">
                                         <fieldset class="form-group">
-                                            <label for="basicInputFile">Photo <small class="text-warning text-lowercase text-right" >  <em>{{ __("pages.required") }} *</em> </small> </label>
+                                            <label for="basicInputFile">Photo <small class="text-warning text-lowercase text-right" >  <em>330 x 260 * (obligatoire)</em> </small> </label>
                                             <div class="custom-file">
                                                 <input type="file" value="{{ old('image') }}" class="custom-file-input champ @error('image') is-invalid @enderror" name="image" id="inputGroupFile01" multiple>
                                                 <label class="custom-file-label" for="inputGroupFile01">Choose file</label>
-                                                @error('image')
-                                                    <small class="text-light-danger">{{ $message }}</small>
-                                                @enderror
+                                                <small class="text-danger"></small>
                                             </div>
                                         </fieldset>
                                     </div>

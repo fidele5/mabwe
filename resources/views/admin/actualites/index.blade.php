@@ -37,6 +37,8 @@
                                         <th>Titre</th>
                                         <th>Contenu</th>
                                         <th>Categorie</th>
+                                        <th>Vues</th>
+                                        <th>Commentaires</th>
                                         <th>Actions</th>
                                     </tr>
                                 </thead>
@@ -46,12 +48,17 @@
                                             <td class="text-truncate" style="max-width: 200px">{{ $post->title }}</td>
                                             <td class="text-truncate" style="max-width: 250px">{{ $post->text }}</td>
                                             <td>{{ $post->post_category->name }}</td>
+                                            <td>{{ $post->views ? $post->views : 0 }}</td>
+                                            <td>{{ $post->comments->count() }}</td>
                                             <td>
                                                 <a href="{{ route("post.edit", $post) }}">
                                                     <i class="bx bx-edit"></i>
                                                 </a>
                                                 <a class="delete" href="{{ route("post.destroy", $post) }}">
                                                     <i class="bx bx-trash"></i>
+                                                </a>
+                                                <a href="{{ route("single", $post) }}">
+                                                    <i class="bx bx-show"></i>
                                                 </a>
                                             </td>
                                         </tr>
@@ -62,6 +69,8 @@
                                         <th>Titre</th>
                                         <th>Contenu</th>
                                         <th>Categorie</th>
+                                        <th>Vues</th>
+                                        <th>Commentaires</th>
                                         <th>Actions</th>
                                     </tr>
                                 </tfoot>

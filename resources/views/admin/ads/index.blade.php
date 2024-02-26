@@ -37,6 +37,8 @@
                                         <th>Titre</th>
                                         <th>Company</th>
                                         <th>Image</th>
+                                        <th>Image pour tablette</th>
+                                        <th>Lien externe</th>
                                         <th>Expiration</th>
                                         <th>Actions</th>
                                     </tr>
@@ -46,13 +48,19 @@
                                         <tr>
                                             <td class="text-truncate" style="max-width: 200px">{{ $companyAd->title }}</td>
                                             <td class="text-truncate" style="max-width: 250px">{{ $companyAd->company->name }}</td>
-                                            <td>{{ $companyAd->image_path }}</td>
-                                            <td>{{ $companyAd->expire_at }}</td>
+                                            <td>
+                                                <img src="/{{ $companyAd->image_path }}" alt="{{ $companyAd->title }}" height="64" width="64">
+                                            </td>
+                                            <td>
+                                                <img src="/{{ $companyAd->tablet_image }}" alt="{{ $companyAd->title }}" height="64" width="64">
+                                            </td>
+                                            <td> {{ $companyAd->external_url }}</td>
+                                            <td> {{ $companyAd->expire_at }}</td>
                                             <td>
                                                 <a href="{{ route("ads.edit", $companyAd) }}">
                                                     <i class="bx bx-edit"></i>
                                                 </a>
-                                                <a class="delete" href="{{ route("ads.destroy", $post) }}">
+                                                <a class="delete" href="{{ route("ads.destroy", $companyAd) }}">
                                                     <i class="bx bx-trash"></i>
                                                 </a>
                                             </td>
@@ -64,6 +72,8 @@
                                         <th>Titre</th>
                                         <th>Company</th>
                                         <th>Image</th>
+                                        <th>Image pour tablette</th>
+                                        <th>Lien externe</th>
                                         <th>Expiration</th>
                                         <th>Actions</th>
                                     </tr>

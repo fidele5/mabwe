@@ -18,6 +18,8 @@ return new class extends Migration
             $table->string("image");
             $table->unsignedBigInteger("user_id");
             $table->unsignedBigInteger("post_category_id");
+            $table->integer("views")->default(0)->nullable();
+            $table->string("external_link")->nullable();
             $table->timestamps();
             $table->softDeletes();
         });

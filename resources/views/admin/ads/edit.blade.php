@@ -30,60 +30,71 @@
                 </div>
                 <div class="card-content">
                     <div class="card-body">
-                        <form class="form" method="POST" action="{{ route("ads.update", $videoAd->id) }}" enctype="multipart/form-data">
+                        <form class="form" method="POST" action="{{ route("ads.update", $companyAd->id) }}" enctype="multipart/form-data">
                             @csrf
                             @method("patch")
                             <div class="form-body">
                                 <div class="row justify-content-center">
                                     <div class="col-12">
                                         <div class="form-group">
-                                            <label for="first-title-floating">Titre</label>
-                                            <input type="text" value="{{ $videoAd->title }}" id="first-title-floating" class="form-control champ @error('title') is-invalid @enderror" placeholder="Titre" name="title">
-                                            @error('title')
-                                                <small>{{$message}}</small>
-                                            @enderror
+                                            <label for="first-title-floating">Titre <small class="text-warning text-lowercase text-right" >  <em> (Obligatoire) *</em></small></label>
+                                            <input type="text" value="{{ $companyAd->title }}" id="first-title-floating" class="form-control champ @error('title') is-invalid @enderror" placeholder="Titre" name="title">
+                                            <small class="text-danger"></small>
                                         </div>
                                     </div>
                                     
                                     <div class="col-12">
                                         <div class="form-group">
-                                            <label>Compagnie</label>
+                                            <label>Compagnie <small class="text-warning text-lowercase text-right" >  <em> (Obligatoire) *</em></small></label>
                                             <select name="company_id" id="categorie" class="custom-select champ @error('company_id') is-invalid @enderror">
                                                 @foreach ($companies as $company)
-                                                    <option value="{{ $company->id }}" @if($videoAd->company_id == $company->id) selected="" @endif>{{ $company->name }}</option>
+                                                    <option value="{{ $company->id }}" @if($companyAd->company_id == $company->id) selected="" @endif>{{ $company->name }}</option>
                                                 @endforeach
-                                                @error('company_id')
-                                                    <small>{{ $message }}</small>
-                                                @enderror
+                                                <small class="text-danger"></small>
                                             </select>
                                         </div>
                                     </div>
 
                                     <div class="col-12">
                                         <div class="form-group">
-                                            <label for="first-title-floating">Durée</label>
+                                            <label for="first-title-floating">Durée <small class="text-warning text-lowercase text-right" >  <em> (Obligatoire) *</em></small></label>
                                             <div class="input-group">
-                                                <input type="number" value="{{ $videoAd->duration )}}" id="first-title-floating" class="form-control champ @error('duration') is-invalid @enderror" placeholder="Duree d'affichage" name="duration">
+                                                <input type="number" value="{{ $companyAd->duration }}" id="first-title-floating" class="form-control champ @error('duration') is-invalid @enderror" placeholder="Duree d'affichage" name="duration">
                                                 <div class="input-group-append">
                                                     <span class="input-group-text" id="basic-addon2">Jours</span>
                                                 </div>
                                             </div>
-                                            @error('duration')
-                                                <small class="text-light-danger">{{ $message }}</small>
-                                            @enderror
+                                            <small class="text-danger"></small>
                                         </div>
                                         
                                     </div>
 
+                                    <div class="col-12">
+                                        <div class="form-group mb-0">
+                                            <label for="first-title-floating">Lien de redirection </label>
+                                            <input type="url" id="first-title-floating" value="{{ $companyAd->external_url }}" class="form-control @error('video_path') is-invalid @enderror" placeholder="Url de redirection" name="video_path">
+                                            <small class="text-danger"></small>
+                                        </div>
+                                    </div>
+                                    
                                     <div class="col-md-12">
                                         <fieldset class="form-group">
-                                            <label for="basicInputFile">Image  <small class="text-warning text-lowercase text-right" >  <em>{{ __("pages.required") }} *</em> </small> </label>
+                                            <label for="basicInputFile">Image  <small class="text-warning text-lowercase text-right" >  <em> 300x250 (Obligatoire) *</em> </small> </label>
                                             <div class="custom-file">
-                                                <input type="file" value="{{ $videoAd->image_path }}" class="custom-file-input champ @error('image') is-invalid @enderror" name="image" id="inputGroupFile01">
+                                                <input type="file" class="custom-file-input @error('image') is-invalid @enderror" name="image" id="inputGroupFile01">
                                                 <label class="custom-file-label" for="inputGroupFile01">Choose file</label>
-                                                @error('image')
-                                                    <small class="text-light-danger">{{ $message }}</small>
-                                                @enderror
+                                                <small class="text-danger"></small>
+                                            </div>
+                                        </fieldset>
+                                    </div>
+                                    
+                                    <div class="col-md-12">
+                                        <fieldset class="form-group">
+                                            <label for="basicInputFile">Image tablette  <small class="text-warning text-lowercase text-right" >  <em>200x200 (Obligatoire) *</em> </small> </label>
+                                            <div class="custom-file">
+                                                <input type="file" class="custom-file-input @error('image') is-invalid @enderror" name="image_tablet" id="inputGroupFile01">
+                                                <label class="custom-file-label" for="inputGroupFile01">Choose file</label>
+                                                <small class="text-danger"></small>
                                             </div>
                                         </fieldset>
                                     </div>

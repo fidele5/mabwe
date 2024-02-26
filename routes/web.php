@@ -33,16 +33,17 @@ Route::get("about", [HomeController::class, "about"])->name("about");
 Route::get("partners", [HomeController::class, "partners"])->name("partners");
 Route::get("contact", [HomeController::class, "contact"])->name("contact");
 
-
 Auth::routes();
 
-Route::prefix("admin")->group(function () {
-    Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-    Route::resource('post', PostController::class);
-    Route::resource('video-post', VideoPostController::class);
-    Route::resource('ads', CompanyAdController::class);
-    Route::resource('post-category', PostCategoryController::class);
-    Route::resource('company-type', CompanyTypeController::class);
-    Route::resource('settings', SettingController::class);
-    Route::resource('company', CompanyController::class);
+Route::middleware("auth")->group(function(){
+    Route::prefix("admin")->group(function () {
+        Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+        Route::resource('post', PostController::class);
+        Route::resource('video-post', VideoPostController::class);
+        Route::resource('ads', CompanyAdController::class);
+        Route::resource('post-category', PostCategoryController::class);
+        Route::resource('company-type', CompanyTypeController::class);
+        Route::resource('settings', SettingController::class);
+        Route::resource('company', CompanyController::class);
+    });
 });

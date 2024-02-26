@@ -35,9 +35,7 @@
                                 <thead>
                                     <tr>
                                         <th>Titre</th>
-                                        <th>Caption</th>
                                         <th>Categorie</th>
-                                        <th>Path</th>
                                         <th>Actions</th>
                                     </tr>
                                 </thead>
@@ -45,9 +43,7 @@
                                     @foreach ($videoPosts as $videoPost)
                                         <tr>
                                             <td class="text-truncate" style="max-width: 200px">{{ $videoPost->title }}</td>
-                                            <td class="text-truncate" style="max-width: 250px">{{ $videoPost->caption }}</td>
                                             <td>{{ $videoPost->post_category->name }}</td>
-                                            <td><a href="{{ $videoPost->video_path }}" target="_blanc">{{ $videoPost->video_path }}</a></td>
                                             <td>
                                                 <a href="{{ route("video-post.edit", $videoPost) }}">
                                                     <i class="bx bx-edit"></i>
@@ -62,9 +58,7 @@
                                 <tfoot>
                                     <tr>
                                         <th>Titre</th>
-                                        <th>Caption</th>
                                         <th>Categorie</th>
-                                        <th>Path</th>
                                         <th>Actions</th>
                                     </tr>
                                 </tfoot>

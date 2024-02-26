@@ -36,47 +36,39 @@
                                 <div class="row justify-content-center">
                                     <div class="col-12">
                                         <div class="form-group">
-                                            <label for="first-title-floating">Titre</label>
+                                            <label for="first-title-floating">Titre <small class="text-warning text-lowercase text-right" >  <em> (Obligatoire) *</em></small></label>
                                             <input type="text" value="{{ old('title')}}" id="first-title-floating" class="form-control champ @error('title') is-invalid @enderror" placeholder="Titre" name="title">
-                                            @error('title')
-                                                <small>{{$message}}</small>
-                                            @enderror
+                                            <small class="text-light-danger"></small>
                                         </div>
                                     </div>
                                     
                                     <div class="col-12">
                                         <div class="form-group">
-                                            <label>Catégorie</label>
+                                            <label>Catégorie <small class="text-warning text-lowercase text-right" >  <em> (Obligatoire) *</em></small></label>
                                             <select name="post_category_id" id="categorie" class="custom-select @error('post_category_id') is-invalid @enderror">
                                                 @foreach ($categories as $categorie)
                                                     <option value="{{ $categorie->id }}" @if(old('categorie') == $categorie->id) selected="" @endif>{{ $categorie->name }}</option>
                                                 @endforeach
-                                                @error('post_category_id')
-                                                    <small>{{ $message }}</small>
-                                                @enderror
+                                                <small class="text-light-danger"></small>
                                             </select>
                                         </div>
                                     </div>
 
                                     <div class="col-12">
                                         <div class="form-group mb-0">
-                                            <label for="first-title-floating">Url</label>
+                                            <label>Url <small class="text-warning text-lowercase text-right" >  <em> (Obligatoire) *</em></small></label>
                                             <input type="url" value="{{ old('video_path')}}" id="first-title-floating" class="form-control champ @error('video_path') is-invalid @enderror" placeholder="Uri de la video" name="video_path">
-                                            @error('text')
-                                                <small class="text-light-danger">{{ $message }}</small>
-                                            @enderror
+                                            <small class="text-light-danger"></small>
                                         </div>
                                     </div>
 
                                     <div class="col-md-12">
                                         <fieldset class="form-group">
-                                            <label for="basicInputFile">Caption <small class="text-warning text-lowercase text-right" >  <em>{{ __("pages.required") }} *</em> </small> </label>
+                                            <label>Caption <small class="text-warning text-lowercase text-right" >  <em> 270 x 200 (Obligatoire) *</em> </small> </label>
                                             <div class="custom-file">
                                                 <input type="file" class="custom-file-input @error('caption') is-invalid @enderror" name="caption" id="inputGroupFile01">
                                                 <label class="custom-file-label" for="inputGroupFile01">Choose file</label>
-                                                @error('caption')
-                                                    <small class="text-light-danger">{{ $message }}</small>
-                                                @enderror
+                                                <small class="text-light-danger"></small>
                                             </div>
                                         </fieldset>
                                     </div>

@@ -44,7 +44,7 @@ class PostController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'image' => 'required|image',
+            'image' => 'required|image|dimensions:max_width=800,max_height=533',
             'title' => 'required',
             'text' => 'required',
             'post_category_id' => 'required|numeric|exists:post_categories,id'
@@ -54,6 +54,8 @@ class PostController extends Controller
         $post->title = $request->title;
         $post->text = $request->text;
         $post->post_category_id = $request->post_category_id;
+        $post->external_link = $request->external_link;
+        $post->views = 0;
 
         if ($request->hasFile("image")) {
             $file = $request->file('image');
@@ -104,6 +106,7 @@ class PostController extends Controller
     public function update(Request $request, $id)
     {
         $this->validate($request, [
+            'image' => 'image|dimensions:max_width=800,max_height=533',
             'title' => 'required',
             'text' => 'required',
             'post_category_id' => 'required|numeric|exists:post_categories,id'
@@ -114,6 +117,7 @@ class PostController extends Controller
         $post->post_category_id = $request->post_category_id;
         $post->title = $request->title;
         $post->text = $request->text;
+        $post->external_link = $request->external_link;
 
         if ($request->hasFile("image")) {
             $file = $request->file('image');

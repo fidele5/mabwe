@@ -30,42 +30,43 @@
                 </div>
                 <div class="card-content">
                 <div class="card-body">
-                    <form class="form" method="POST" action="{{ route("post.update", $post) }}">
+                    <form class="form" method="POST" action="{{ route("post.update", $post->id) }}">
                         @csrf
                         @method("patch")
                         <div class="form-body">
                             <div class="row justify-content-center">
                                 <div class="col-12">
                                     <div class="form-group">
-                                        <label for="first-title-floating">Titre</label>
+                                        <label for="first-title-floating">Titre <small class="text-warning text-lowercase text-right" >  <em>* (obligatoire)</em> </small></label>
                                         <input type="text" value="{{ $post->title}}" id="first-title-floating" class="form-control champ @error('title') is-invalid @enderror" placeholder="Titre" name="title">
-                                        @error('title')
-                                            <small>{{$message}}</small>
-                                        @enderror
+                                        <small class="text-danger"></small>
                                     </div>
                                 </div>
                                 <div class="col-12">
                                     <div class="form-group">
-                                        <label>Catégorie</label>
+                                        <label>Catégorie <small class="text-warning text-lowercase text-right" >  <em>* (obligatoire)</em> </small></label>
                                         <select name="post_category_id" id="categorie" class="custom-select @error('post_category_id') is-invalid @enderror">
                                             @foreach ($categories as $categorie)
                                                 <option value="{{ $categorie->id }}" @if($post->categorie_realisation_id == $categorie->id) selected="" @endif>{{ $categorie->name }}</option>
                                             @endforeach
-                                            @error('post_category_id')
-                                                <small>{{ $message }}</small>
-                                            @enderror
+                                            <small class="text-danger"></small>
                                         </select>
                                     </div>
                                 </div>
                                 <div class="col-12">
                                     <fieldset class="form-group mb-0">
-                                        <label for="textarea-counter">Text</label>
+                                        <label for="textarea-counter">Texte <small class="text-warning text-lowercase text-right" >  <em>* (obligatoire)</em> </small></label>
                                         <textarea data-length=20 class="form-control char-textarea champ @error('text') is-invalid @enderror" id="textarea-counter" rows="5" name="text" placeholder="Text">{{ $post->text }}</textarea>
-                                        @error('text')
-                                            <small class="text-light-danger">{{ $message }}</small>
-                                        @enderror
+                                        <small class="text-danger"></small>
                                     </fieldset>
                                     <small class="counter-value float-right"><span class="char-count">0</span> / 20 </small>
+                                </div>
+
+                                <div class="col-12">
+                                    <div class="form-group">
+                                        <label for="first-title-floating">Lien externe</label>
+                                        <input type="url" value="{{ $post->external_link }}"  id="first-title-floating" class="form-control" placeholder="Lien externe" name="external_link">
+                                    </div>
                                 </div>
 
                                 <div class="col-md-12">
@@ -74,12 +75,11 @@
                                         <div class="custom-file">
                                             <input type="file" value="{{ $post->image }}" class="custom-file-input @error('image') is-invalid @enderror" name="image" id="inputGroupFile01">
                                             <label class="custom-file-label" for="inputGroupFile01">Choose file</label>
-                                            @error('image')
-                                                <small class="text-light-danger">{{ $message }}</small>
-                                            @enderror
+                                            <small class="text-danger"></small>
                                         </div>
                                     </fieldset>
                                 </div>
+
                                 <div class="col-12 d-flex justify-content-end">
                                     <button type="submit" class="btn btn-primary mr-1 mb-1">Mettre à jour</button>
                                     <button type="reset" class="btn btn-light-secondary mr-1 mb-1">Annuler</button>
