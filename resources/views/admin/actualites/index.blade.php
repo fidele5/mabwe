@@ -37,7 +37,6 @@
                                         <th>Titre</th>
                                         <th>Contenu</th>
                                         <th>Categorie</th>
-                                        <th>Photo</th>
                                         <th>Actions</th>
                                     </tr>
                                 </thead>
@@ -63,7 +62,6 @@
                                         <th>Titre</th>
                                         <th>Contenu</th>
                                         <th>Categorie</th>
-                                        <th>Photo</th>
                                         <th>Actions</th>
                                     </tr>
                                 </tfoot>

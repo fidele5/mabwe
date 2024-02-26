@@ -26,8 +26,8 @@
                                     <img src="/{{ $post->image }}" alt="">
                                     <div class="hover-box">
                                         <div class="inner-hover">
-                                            <a class="category-post sport" href="sport.html">{{ $post->post_category->name }}</a>
-                                            <h2><a href="single-post.html">{{ $post->title }}
+                                            <a class="category-post sport" href="{{ route("category", $post->post_category_id) }}">{{ $post->post_category->name }}</a>
+                                            <h2><a href="{{ route("single", $post) }}">{{ $post->title }}
                                                 </a></h2>
                                             <ul class="post-tags">
                                                 <li><i class="fa fa-clock-o"></i>{{ $post->created_at->diffForHumans() }}</li>
@@ -44,13 +44,13 @@
                 </div>
             @endif
 
-            @foreach ($breakingNews as $post)
+            @foreach ($posts as $post)
                 <div class="news-post image-post {{ $loop->first ? 'default-size' : '' }}">
                     <img src="/{{ $post->image }}" alt="">
                     <div class="hover-box">
                         <div class="inner-hover">
-                            <a class="category-post travel" href="travel.html">{{ $post->post_category->name }}</a>
-                            <h2><a href="single-post.html">{{ $post->title }}</a></h2>
+                            <a class="category-post travel" href="{{ route("category", $post->post_category_id) }}">{{ $post->post_category->name }}</a>
+                            <h2><a href="{{ route("single", $post) }}">{{ $post->title }}</a></h2>
                             <ul class="post-tags">
                                 <li><i class="fa fa-clock-o"></i><span>{{ $post->created_at->diffForHumans() }}</span></li>
                                 <li><a href="#"><i class="fa fa-comments-o"></i><span>{{ $post->comments_count }}</span></a></li>
@@ -91,8 +91,8 @@
                                             <img src="/{{ $mostLikedPost[0]->image }}" alt="">
                                             <div class="hover-box">
                                                 <div class="inner-hover">
-                                                    <a class="category-post tech" href="tech.html"></a>
-                                                    <h2><a href="single-post.html">{{ $mostLikedPost[0]->title }} </a></h2>
+                                                    <a class="category-post tech" href="{{ route("category", $mostLikedPost[0]->post_category_id) }}"></a>
+                                                    <h2><a href="{{ route("single", $mostLikedPost[0]->id) }}">{{ $mostLikedPost[0]->title }} </a></h2>
                                                     <ul class="post-tags">
                                                         <li><i class="fa fa-clock-o"></i>{{ $mostLikedPost[0]->created_at->diffForHumans() }}</li>
                                                         <li><i class="fa fa-user"></i>Par <a href="#">{{ $mostLikedPost[0]->user->name }}</a>
@@ -113,8 +113,8 @@
                                             <li>
                                                 <img src="/{{ $post->image }}" alt="">
                                                 <div class="post-content">
-                                                    <a href="travel.html">{{ $post->post_category->name }}</a>
-                                                    <h2><a href="single-post.html">{{ $post->text }}</a></h2>
+                                                    <a href="{{ route("category", $post->post_category_id) }}">{{ $post->post_category->name }}</a>
+                                                    <h2><a href="{{ route("single", $post) }}">{{ $post->text }}</a></h2>
                                                     <ul class="post-tags">
                                                         <li><i class="fa fa-clock-o"></i>{{ $post->created_at->diffForHumans() }}</li>
                                                     </ul>
@@ -127,7 +127,7 @@
                         </div>
 
                         <div class="center-button">
-                            <a href="#"><i class="fa fa-refresh"></i>Voir plus</a>
+                            <a href="{{ route("posts") }}"><i class="fa fa-refresh"></i>Voir plus</a>
                         </div>
 
                     </div>
@@ -165,7 +165,7 @@
                                         <a href="{{ $videoPost->video_path }}" class="video-link"><i
                                                 class="fa fa-play-circle-o"></i></a>
                                         <div class="hover-box">
-                                            <h2><a href="single-post.html">{{ $videoPost->title }}</a>
+                                            <h2><a href="#">{{ $videoPost->title }}</a>
                                             </h2>
                                             <ul class="post-tags">
                                                 <li><i class="fa fa-clock-o"></i>{{ $videoPost->created_at->diffForHumans() }}</li>
@@ -213,7 +213,7 @@
                                         </div>
                                         <div class="col-sm-7">
                                             <div class="post-content">
-                                                <h2><a href="single-post.html">{{ $post->title }}</a></h2>
+                                                <h2><a href="{{ route("single", $post) }}">{{ $post->title }}</a></h2>
                                                 <ul class="post-tags">
                                                     <li><i class="fa fa-clock-o"></i>{{ $post->created_at->diffForHumans() }}</li>
                                                     <li><i class="fa fa-user"></i>Par <a href="#">{{ $post->user->name }}</a></li>
@@ -222,7 +222,7 @@
                                                     <li><i class="fa fa-eye"></i>872</li>
                                                 </ul>
                                                 <p class="text-truncate" style="max-width: 250px">{{ \Str::limit($post->text, 150, "...") }}</p>
-                                                <a href="single-post.html" class="read-more-button"><i
+                                                <a href="{{ route("single", $post) }}" class="read-more-button"><i
                                                         class="fa fa-arrow-circle-right"></i>Lire plus</a>
                                             </div>
                                         </div>
@@ -233,22 +233,6 @@
 
                     </div>
                     <!-- End article box -->
-
-                    <!-- pagination box -->
-                    @if (count($posts))
-                        <div class="pagination-box">
-                            <ul class="pagination-list">
-                                <li><a class="active" href="#">1</a></li>
-                                <li><a href="#">2</a></li>
-                                <li><a href="#">3</a></li>
-                                <li><span>...</span></li>
-                                <li><a href="#">9</a></li>
-                                <li><a href="#">Next</a></li>
-                            </ul>
-                            <p>Page 1 of 9</p>
-                        </div>
-                    @endif
-                    <!-- End Pagination box -->
 
                 </div>
                 <!-- End block content -->
@@ -303,7 +287,7 @@
                                         <li>
                                             <img src="/{{ $post->image }}" alt="">
                                             <div class="post-content">
-                                                <h2><a href="single-post.html">{{ $post->title }}</a></h2>
+                                                <h2><a href="{{ route("single", $post) }}">{{ $post->title }}</a></h2>
                                                 <ul class="post-tags">
                                                     <li><i class="fa fa-clock-o"></i>{{ $post->created_at->diffForHumans() }}</li>
                                                 </ul>
@@ -325,15 +309,12 @@
                                     <ul class="comment-list">
                                         @foreach ($todayComments as $comment)    
                                             <li>
-                                                <img src="upload/news-posts/avatar1.jpg" alt="">
+                                                <img src="/images/ico.jpeg" alt="">
                                                 <div class="comment-content">
                                                     <p class="main-message">
-                                                        Donec nec justo eget felis fermentum. Aliquam porttitor mauris sit
-                                                        amet orci. Aenean dignissim pellentesque felis.
+                                                        {{ $comment->text }}
                                                     </p>
-                                                    <p>Suspendisse urna nibh, viverra non, semper suscipit, posuere a, pede.
-                                                    </p>
-                                                    <span><i class="fa fa-user"></i>by John Doe</span>
+                                                    <span><i class="fa fa-user"></i>Par {{ $comment->username }}</span>
                                                 </div>
                                             </li>
                                         @endforeach
@@ -343,15 +324,12 @@
                                     <ul class="comment-list">
                                         @foreach ($recentComments as $comment)    
                                             <li>
-                                                <img src="upload/news-posts/avatar3.jpg" alt="">
+                                                <img src="/images/ico.jpeg" alt="">
                                                 <div class="comment-content">
                                                     <p class="main-message">
-                                                        Morbi in sem quis dui placerat ornare. Pellentesque odio nisi,
-                                                        euismod in, pharetra a, ultricies in, diam. Sed arcu. Cras
-                                                        consequat.
+                                                        {{ $comment->text }}
                                                     </p>
-                                                    <p>Aliquam porttitor mauris sit amet orci. </p>
-                                                    <span><i class="fa fa-user"></i>by John Doe</span>
+                                                    <span><i class="fa fa-user"></i>Par {{ $comment->username }}</span>
                                                 </div>
                                             </li>
                                         @endforeach

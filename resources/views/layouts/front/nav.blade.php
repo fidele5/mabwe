@@ -38,7 +38,7 @@
                                 <span class="cel-temperature">+7</span>
                             </li>
                             <li><span class="time-now">{{ \Carbon\Carbon::now()->isoFormat('LLLL') }}</span></li>
-                            <li><a href="contact.html">Contact</a></li>
+                            <li><a href="{{ route("contact") }}">Contact</a></li>
                         </ul>
                     </div>
                     <div class="col-md-3">
@@ -69,7 +69,7 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand" href="index.html"><img src="/images/mabwe_logo.png" width="10%" alt=""></a>
+                    <a class="navbar-brand" href="/"><img src="/images/mabwe_logo.png" width="10%" alt=""></a>
                 </div>
 
                 <div class="advertisement">
@@ -92,64 +92,19 @@
                 <!-- Collect the nav links, forms, and other content for toggling -->
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                     <ul class="nav navbar-nav navbar-left">
-                        <li><a class="home" href="index.html">Accueil</a></li>
-                        <li><a class="fashion" href="news-category6.html">Actualités</a></li>
+                        <li><a class="home" href="/">Accueil</a></li>
+                        <li><a class="fashion" href="{{ route("posts") }}">Actualités</a></li>
                         <li class="drop"><a class="features" href="#">Site miniers</a>
                             <ul class="dropdown features-dropdown">
-                                <li class="drop"><a href="#">Category Layouts</a>
-                                    <ul class="dropdown level2">
-                                        <li><a href="news-category1.html">Large Image Sidebar</a></li>
-                                        <li><a href="news-category2.html">Left Sidebar Thumbnail</a></li>
-                                        <li><a href="news-category3.html">Both Sidebar</a></li>
-                                        <li><a href="news-category4.html">2 Grid sidebar</a></li>
-                                        <li><a href="news-category5.html">3 Grid no sidebar</a></li>
-                                        <li><a href="news-category6.html">Fullwidth &amp; slider</a></li>
-                                    </ul>
-                                </li>
-                                <li class="drop"><a href="#">Header Layouts</a>
-                                    <ul class="dropdown level2">
-                                        <li><a href="index.html">Default header</a></li>
-                                        <li><a href="header2.html">header 2</a></li>
-                                        <li><a href="header3.html">header 3</a></li>
-                                        <li><a href="header4.html">header 4</a></li>
-                                        <li><a href="header5.html">header 5</a></li>
-                                    </ul>
-                                </li>
-                                <li class="drop"><a href="#">Post Formats</a>
-                                    <ul class="dropdown level2">
-                                        <li><a href="single-post.html">Single Post 1</a></li>
-                                        <li><a href="single-post2.html">Single Post 2</a></li>
-                                        <li><a href="single-post3.html">Single Post 3</a></li>
-                                        <li><a href="single-post4.html">Single Post 4</a></li>
-                                        <li><a href="single-post5.html">Single Post 5</a></li>
-                                        <li><a href="single-post6.html">Single Post 6</a></li>
-                                        <li><a href="single-post7.html">Single Post 7</a></li>
-                                        <li><a href="single-post8.html">Single Post 8</a></li>
-                                    </ul>
-                                </li>
-                                <li class="drop"><a href="#">Forum Pages</a>
-                                    <ul class="dropdown level2">
-                                        <li><a href="forums.html">Forums</a></li>
-                                        <li><a href="forum-category.html">Topics</a></li>
-                                        <li><a href="forum-topic.html">Single Topic</a></li>
-                                    </ul>
-                                </li>
-                                <li><a href="allfooter.html">All footer widgets</a></li>
-                                <li><a href="autor-list.html">Autor List</a></li>
-                                <li><a href="autor-details.html">Autor Details</a></li>
-                                <li><a href="404-error.html">404 Error</a></li>
-                                <li><a href="underconstruction.html">Underconstruction</a></li>
-                                <li><a href="comming-soon.html">Comming soon Page</a></li>
+                                @foreach (get_company_types() as $companyType)
+                                    <li><a href="{{ route("companies", $companyType) }}">{{ $companyType->name }}</a></li>
+                                @endforeach
                             </ul>
                         </li>
-                        <li><a class="sport" href="news-category5.html">Nos partenaires</a></li>
-                        <li><a class="sport" href="news-category5.html">A propos de nous</a></li>
+                        <li><a class="sport" href="{{ route("partners") }}">Nos partenaires</a></li>
+                        <li><a class="sport" href="{{ route("about") }}">A propos de nous</a></li>
 
                     </ul>
-                    <form class="navbar-form navbar-right" role="search">
-                        <input type="text" id="search" name="search" placeholder="Search here">
-                        <button type="submit" id="search-submit"><i class="fa fa-search"></i></button>
-                    </form>
                 </div>
                 <!-- /.navbar-collapse -->
             </div>

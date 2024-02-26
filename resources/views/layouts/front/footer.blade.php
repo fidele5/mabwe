@@ -6,14 +6,12 @@
             <div class="row">
                 <div class="col-md-3">
                     <div class="widget text-widget">
-                        <h1>About</h1>
-                        <p>Donec nec justo eget felis facilisis fermentum. Aliquam porttitor mauris sit amet orci.
-                            Aenean dignissim pellentesque felis. </p>
-                        <p>Morbi in sem quis dui placerat ornare. Pellentesque odio nisi, euismod in, pharetra a,
-                            ultricies in, diam. Sed arcu. </p>
+                        <h1>A propos de nous</h1>
+                        <p>Nous sommes une entreprise de communication </p>
+                        <p>Nous propulsons les entreprises a un niveau exeptionnel</p>
                     </div>
                     <div class="widget social-widget">
-                        <h1>Stay Connected</h1>
+                        <h1>Restez avec nous</h1>
                         <ul class="social-icons">
                             <li><a href="#" class="facebook"><i class="fa fa-facebook"></i></a></li>
                             <li><a href="#" class="google"><i class="fa fa-google-plus"></i></a></li>
@@ -31,100 +29,33 @@
                 </div>
                 <div class="col-md-3">
                     <div class="widget posts-widget">
-                        <h1>Random Post</h1>
+                        <h1>Dernieres actualites</h1>
                         <ul class="list-posts">
-                            <li>
-                                <img src="upload/news-posts/listw4.jpg" alt="">
-                                <div class="post-content">
-                                    <a href="travel.html">travel</a>
-                                    <h2><a href="single-post.html">Pellentesque odio nisi, euismod in ultricies in,
-                                            diam. </a></h2>
-                                    <ul class="post-tags">
-                                        <li><i class="fa fa-clock-o"></i>27 may 2013</li>
-                                    </ul>
-                                </div>
-                            </li>
-
-                            <li>
-                                <img src="upload/news-posts/listw1.jpg" alt="">
-                                <div class="post-content">
-                                    <a href="business.html">business</a>
-                                    <h2><a href="single-post.html">Sed arcu. Cras consequat.</a></h2>
-                                    <ul class="post-tags">
-                                        <li><i class="fa fa-clock-o"></i>27 may 2013</li>
-                                    </ul>
-                                </div>
-                            </li>
-
-                            <li>
-                                <img src="upload/news-posts/listw3.jpg" alt="">
-                                <div class="post-content">
-                                    <a href="tech.html">tech</a>
-                                    <h2><a href="single-post.html">Phasellus ultrices nulla quis nibh. Quisque a
-                                            lectus.</a></h2>
-                                    <ul class="post-tags">
-                                        <li><i class="fa fa-clock-o"></i>27 may 2013</li>
-                                    </ul>
-                                </div>
-                            </li>
+                            @foreach (get_lastest_news() as $post)    
+                                <li>
+                                    <img src="/{{ $post->image }}" alt="">
+                                    <div class="post-content">
+                                        <a href="{{ route("category", $post->post_category_id) }}">{{ $post->post_category->name }}</a>
+                                        <h2><a href="{{ route("single", $post) }}">{{ $post->title }}</a></h2>
+                                        <ul class="post-tags">
+                                            <li><i class="fa fa-clock-o"></i>{{ $post->created_at->diffForHumans() }}</li>
+                                        </ul>
+                                    </div>
+                                </li>
+                            @endforeach
                         </ul>
                     </div>
                 </div>
                 <div class="col-md-3">
                     <div class="widget categories-widget">
-                        <h1>Hot Categories</h1>
+                        <h1>Categories</h1>
                         <ul class="category-list">
-                            <li>
-                                <a href="#">Business <span>12</span></a>
-                            </li>
-                            <li>
-                                <a href="#">Sport <span>26</span></a>
-                            </li>
-                            <li>
-                                <a href="#">LifeStyle <span>55</span></a>
-                            </li>
-                            <li>
-                                <a href="#">Fashion <span>37</span></a>
-                            </li>
-                            <li>
-                                <a href="#">Technology <span>62</span></a>
-                            </li>
-                            <li>
-                                <a href="#">Music <span>10</span></a>
-                            </li>
-                            <li>
-                                <a href="#">Culture <span>43</span></a>
-                            </li>
-                            <li>
-                                <a href="#">Design <span>74</span></a>
-                            </li>
-                            <li>
-                                <a href="#">Entertainment <span>11</span></a>
-                            </li>
-                            <li>
-                                <a href="#">video <span>41</span></a>
-                            </li>
-                            <li>
-                                <a href="#">Travel <span>11</span></a>
-                            </li>
-                            <li>
-                                <a href="#">Food <span>29</span></a>
-                            </li>
+                            @foreach (get_categories() as $category)    
+                                <li>
+                                    <a href="{{ route("category", $category) }}">{{ $category->name }} <span>{{ $category->posts->count() }}</span></a>
+                                </li>
+                            @endforeach
                         </ul>
-                    </div>
-                </div>
-                <div class="col-md-3">
-                    <div class="widget flickr-widget">
-                        <h1>Flickr Photos</h1>
-                        <ul class="flickr-list">
-                            <li><a href="#"><img src="upload/flickr/1.jpg" alt=""></a></li>
-                            <li><a href="#"><img src="upload/flickr/2.jpg" alt=""></a></li>
-                            <li><a href="#"><img src="upload/flickr/3.jpg" alt=""></a></li>
-                            <li><a href="#"><img src="upload/flickr/4.jpg" alt=""></a></li>
-                            <li><a href="#"><img src="upload/flickr/5.jpg" alt=""></a></li>
-                            <li><a href="#"><img src="upload/flickr/6.jpg" alt=""></a></li>
-                        </ul>
-                        <a href="#">View more photos...</a>
                     </div>
                 </div>
             </div>
@@ -132,15 +63,15 @@
         <div class="footer-last-line">
             <div class="row">
                 <div class="col-md-6">
-                    <p>&copy; COPYRIGHT 2015 hotmagazine.com</p>
+                    <p>&copy; COPYRIGHT {{ date('Y') }} Mabwe</p>
                 </div>
                 <div class="col-md-6">
                     <nav class="footer-nav">
                         <ul>
-                            <li><a href="index.html">Home</a></li>
-                            <li><a href="index.html">Purchase Theme</a></li>
-                            <li><a href="about.html">About</a></li>
-                            <li><a href="contact.html">Contact</a></li>
+                            <li><a href="/">Acceuil</a></li>
+                            <li><a href="{{ route("posts") }}">Actualités</a></li>
+                            <li><a href="{{ route("about") }}">Apropos de nous</a></li>
+                            <li><a href="{{ route("contact") }}">Contact</a></li>
                         </ul>
                     </nav>
                 </div>

@@ -23,11 +23,21 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', [HomeController::class, 'welcome']);
+Route::get('/post', [HomeController::class, 'posts'])->name("posts");
+Route::get('/post/{id}/single', [HomeController::class, 'single'])->name("single");
+Route::get('/category/{id}/posts', [HomeController::class, 'category'])->name("category");
+Route::post("comment", [HomeController::class, "comment"])->name("comment");
+Route::get("company/{type}/single", [HomeController::class, "companies"])->name("companies");
+Route::get("company/{id}", [HomeController::class, "company"])->name("company");
+Route::get("about", [HomeController::class, "about"])->name("about");
+Route::get("partners", [HomeController::class, "partners"])->name("partners");
+Route::get("contact", [HomeController::class, "contact"])->name("contact");
+
 
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::prefix("admin")->group(function () {
+    Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
     Route::resource('post', PostController::class);
     Route::resource('video-post', VideoPostController::class);
     Route::resource('ads', CompanyAdController::class);

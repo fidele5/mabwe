@@ -43,7 +43,7 @@
     <script src="/backend/vendors/js/extensions/polyfill.min.js"></script>
     <script src="/backend/vendors/js/extensions/jquery.steps.min.js"></script>
     <script src="/backend/vendors/js/forms/validation/jquery.validate.min.js"></script>
-
+    <script src="/backend/vendors/js/forms/repeater/jquery.repeater.min.js"></script>
     <script src="/backend/vendors/js/pickers/pickadate/picker.js"></script>
     <script src="/backend/vendors/js/pickers/pickadate/picker.date.js"></script>
     <script src="/backend/vendors/js/pickers/pickadate/picker.time.js"></script>
@@ -66,6 +66,7 @@
     <!-- BEGIN: Page JS-->
     <script src="/backend/js/scripts/datatables/datatable.js"></script>
     <script src="/backend/js/scripts/pages/page-users.js"></script>
+    <script src="/backend/js/scripts/forms/form-repeater.js"></script>
     <script src="/ajax/ajax.actions.js"></script>
     <script src="/backend/js/scripts/pickers/dateTime/pick-a-datetime.js"></script>
     <script src="/backend/js/scripts/forms/select/form-select2.js"></script>

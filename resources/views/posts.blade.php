@@ -15,24 +15,22 @@
                             <div class="col-md-4">
                                 <div class="news-post standard-post2">
                                     <div class="post-gallery">
-                                        <img src="upload/news-posts/im7.jpg" alt="">
-                                        <a class="category-post world" href="world.html">Business</a>
+                                        <img src="/{{ $post->image }}" alt="">
+                                        <a class="category-post world" href="{{ route("category", $post->post_category_id) }}">{{ $post->post_category->name}}</a>
                                     </div>
                                     <div class="post-title">
-                                        <h2><a href="single-post.html">Pellentesque odio nisi, euismod in, pharetra a, ultricies
-                                                in, diam. </a></h2>
+                                        <h2><a href="{{ route("single", $post) }}">{{ $post->title }}</a></h2>
                                         <ul class="post-tags">
-                                            <li><i class="fa fa-clock-o"></i>27 may 2013</li>
-                                            <li><i class="fa fa-user"></i>by <a href="#">John Doe</a></li>
-                                            <li><a href="#"><i class="fa fa-comments-o"></i><span>23</span></a></li>
-                                            <li><i class="fa fa-eye"></i>872</li>
+                                            <li><i class="fa fa-clock-o"></i>{{ $post->created_at->diffForHumans() }}</li>
+                                            <li><i class="fa fa-user"></i>Par <a href="#">{{ $post->user->name }}</a></li>
+                                            <li><a href="{{ route("single", $post) }}#comments"><i class="fa fa-comments-o"></i><span>{{ count($post->comments) }}</span></a></li>
+                                            <li><i class="fa fa-eye"></i>{{ $post->views }}</li>
                                         </ul>
                                     </div>
                                     <div class="post-content">
-                                        <p>Donec odio. Quisque volutpat mattis eros. Nullam malesuada erat ut turpis.
-                                            Suspendisse urna nibh, viverra non, semper suscipit, posuere a, pede.</p>
-                                        <a href="single-post.html" class="read-more-button"><i
-                                                class="fa fa-arrow-circle-right"></i>Read More</a>
+                                        <p>{{ \Str::limit($post->text, 150, "...") }}</p>
+                                        <a href="{{ route("single", $post) }}" class="read-more-button"><i
+                                                class="fa fa-arrow-circle-right"></i>Lire plus</a>
                                     </div>
                                 </div>
                             </div>    
@@ -59,17 +57,10 @@
                 <!-- End google addsense -->
 
                 <!-- pagination box -->
-                <div class="pagination-box">
-                    <ul class="pagination-list">
-                        <li><a class="active" href="#">1</a></li>
-                        <li><a href="#">2</a></li>
-                        <li><a href="#">3</a></li>
-                        <li><span>...</span></li>
-                        <li><a href="#">9</a></li>
-                        <li><a href="#">Next</a></li>
-                    </ul>
-                    <p>Page 1 of 9</p>
-                </div>
+
+                {{ $posts->links("vendor.pagination.default") }}
+
+
                 <!-- End Pagination box -->
 
             </div>

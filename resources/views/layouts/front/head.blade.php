@@ -17,4 +17,16 @@
 	<link rel="stylesheet" type="text/css" href="/css/ticker-style.css"/>
 	<link rel="stylesheet" type="text/css" href="/css/style.css" media="screen">
 
+	@if (Route::current()->getName() === "company" || Route::current()->getName() === "about" || Route::current()->getName() === "partners")
+		<link rel="stylesheet" href="/assets/css/plugins/swiper.min.css">
+		<link rel="stylesheet" href="/assets/css/plugins/fontawesome-5.css">
+		<link rel="stylesheet" href="/assets/css/plugins/unicons.css">
+		<link rel="stylesheet" href="/assets/css/plugins/fancybox.min.css">
+		<link rel="stylesheet" href="/assets/css/plugins/metismenu.css">
+		
+		<link rel="stylesheet" href="/assets/css/plugins/hover-revel.css">
+		<link rel="stylesheet" href="/assets/css/plugins/animate.min.css">
+		<link rel="stylesheet" href="/assets/css/style.css">
+	@endif
+
 </head>

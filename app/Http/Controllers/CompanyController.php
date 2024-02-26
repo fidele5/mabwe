@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Company;
+use App\Models\CompanyImage;
 use App\Models\CompanyType;
 use Illuminate\Http\Request;
 
@@ -60,9 +61,25 @@ class CompanyController extends Controller
             $company->logo = $image;
         }
 
+        
         $company->address = $request->address;
         $company->save();
+        
+        if (isset($request->repeater_list)) {
+            $folderName = "uploads/company-images";
 
+            foreach ($request->repeater_list as $key => $value) {
+                $companyImage = new CompanyImage();
+                $companyImage->company_id = $company->id;
+                
+                $filename = \Str::uuid() . "-" . implode('_', explode(' ', strtolower($company->name))) . "." . $value['file']->getClientOriginalExtension();
+                $path = $value['file']->storeAs($folderName, $filename);
+
+                $companyImage->image_path = $path;
+                
+                $companyImage->save();
+            }
+        }
 
         return response()->json([
             "status" => "success",
@@ -83,7 +100,7 @@ class CompanyController extends Controller
      */
     public function edit(Company $company)
     {
-        return view("admin.companies.create")->with([
+        return view("admin.companies.edit")->with([
             "selected_item" => "company",
             "selected_sub_item" => "new",
             "companyTypes" => CompanyType::get(),
@@ -120,6 +137,22 @@ class CompanyController extends Controller
 
         $company->address = $request->address;
         $company->save();
+
+        if (isset($request->repeater_list)) {
+            $folderName = "uploads/company-images";
+
+            foreach ($request->repeater_list as $key => $value) {
+                $companyImage = new CompanyImage();
+                $companyImage->company_id = $company->id;
+                
+                $filename = \Str::uuid() . "-" . implode('_', explode(' ', strtolower($company->name))) . "." . $value['file']->getClientOriginalExtension();
+                $path = $value['file']->storeAs($folderName, $filename);
+
+                $companyImage->image_path = $path;
+                
+                $companyImage->save();
+            }
+        }
 
 
         return response()->json([
