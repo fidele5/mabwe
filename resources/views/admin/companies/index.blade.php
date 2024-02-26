@@ -53,7 +53,9 @@
                                             <td>{{ $company->phone }}</td>
                                             <td>{{ $company->email }}</td>
                                             <td>{{ $company->address }}</td>
-                                            <td>{{ $company->logo }}</td>
+                                            <td>
+                                                <img src="/{{ $company->logo }}" alt="{{ $company->name }}" height="64" width="64">
+                                            </td>
                                             <td>
                                                 <a href="{{ route("company.edit", $company) }}">
                                                     <i class="bx bx-edit"></i>

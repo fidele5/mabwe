@@ -37,6 +37,7 @@
                                         <th>Titre</th>
                                         <th>Contenu</th>
                                         <th>Categorie</th>
+                                        <th>Image</th>
                                         <th>Vues</th>
                                         <th>Commentaires</th>
                                         <th>Actions</th>
@@ -47,6 +48,9 @@
                                         <tr>
                                             <td class="text-truncate" style="max-width: 200px">{{ $post->title }}</td>
                                             <td class="text-truncate" style="max-width: 250px">{{ $post->text }}</td>
+                                            <td>
+                                                <img src="/{{ $post->image }}" alt="{{ $post->title }}" height="64" width="64">
+                                            </td>
                                             <td>{{ $post->post_category->name }}</td>
                                             <td>{{ $post->views ? $post->views : 0 }}</td>
                                             <td>{{ $post->comments->count() }}</td>
@@ -69,6 +73,7 @@
                                         <th>Titre</th>
                                         <th>Contenu</th>
                                         <th>Categorie</th>
+                                        <th>Image</th>
                                         <th>Vues</th>
                                         <th>Commentaires</th>
                                         <th>Actions</th>

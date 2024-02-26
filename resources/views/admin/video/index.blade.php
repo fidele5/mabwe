@@ -36,6 +36,7 @@
                                     <tr>
                                         <th>Titre</th>
                                         <th>Categorie</th>
+                                        <th>Caption</th>
                                         <th>Actions</th>
                                     </tr>
                                 </thead>
@@ -44,6 +45,9 @@
                                         <tr>
                                             <td class="text-truncate" style="max-width: 200px">{{ $videoPost->title }}</td>
                                             <td>{{ $videoPost->post_category->name }}</td>
+                                            <td>
+                                                <img src="/{{ $videoPost->caption }}" alt="{{ $videoPost->title }}" height="64" width="64">
+                                            </td>
                                             <td>
                                                 <a href="{{ route("video-post.edit", $videoPost) }}">
                                                     <i class="bx bx-edit"></i>
@@ -59,6 +63,7 @@
                                     <tr>
                                         <th>Titre</th>
                                         <th>Categorie</th>
+                                        <th>Caption</th>
                                         <th>Actions</th>
                                     </tr>
                                 </tfoot>

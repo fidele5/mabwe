@@ -350,20 +350,25 @@
                         </form>
                     </div>
 
-                    {{-- <div class="advertisement">
-                        <div class="desktop-advert">
-                            <span>Advertisement</span>
-                            <img src="upload/addsense/300x250.jpg" alt="">
+                    @if (get_ads()->count())  
+                        @php
+                            $compantAd = get_random_ad(); 
+                        @endphp  
+                        <div class="advertisement">
+                            <div class="desktop-advert">
+                                <span>{{ $companyAd->title }}</span>
+                                <img src="/{{ $companyAd->image_path }}" alt="">
+                            </div>
+                            <div class="tablet-advert">
+                                <span>{{ $companyAd->title }}</span>
+                                <img src="/{{ $companyAd->tablet_image }}" alt="">
+                            </div>
+                            <div class="mobile-advert">
+                                <span>{{ $companyAd->title }}</span>
+                                <img src="/{{ $companyAd->image_path }}" alt="">
+                            </div>
                         </div>
-                        <div class="tablet-advert">
-                            <span>Advertisement</span>
-                            <img src="upload/addsense/200x200.jpg" alt="">
-                        </div>
-                        <div class="mobile-advert">
-                            <span>Advertisement</span>
-                            <img src="upload/addsense/300x250.jpg" alt="">
-                        </div>
-                    </div> --}}
+                    @endif
 
                 </div>
                 <!-- End sidebar -->

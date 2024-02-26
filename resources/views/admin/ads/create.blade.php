@@ -70,8 +70,8 @@
 
                                     <div class="col-12">
                                         <div class="form-group mb-0">
-                                            <label for="first-title-floating">Lien de redirection <small class="text-warning text-lowercase text-right" >  <em> (Obligatoire) *</em></small></label>
-                                            <input type="url" id="first-title-floating" class="form-control champ @error('video_path') is-invalid @enderror" placeholder="Url de redirection" name="video_path">
+                                            <label for="first-title-floating">Lien de redirection</label>
+                                            <input type="url" id="first-title-floating" class="form-control champ @error('external_url') is-invalid @enderror" placeholder="Url de redirection" name="external_url">
                                             <small class="text-danger"></small>
                                         </div>
                                     </div>

@@ -41,7 +41,8 @@ class CompanyController extends Controller
         $request->validate([
             'name' => 'required',
             'description' => 'required',
-            'company_type_id' => 'required|numeric|exists:company_types,id'
+            'company_type_id' => 'required|numeric|exists:company_types,id',
+            'logo' => 'required|dimensions:max_width=270,max_height=200'
         ]);
 
         $company = new Company();
@@ -116,7 +117,8 @@ class CompanyController extends Controller
         $request->validate([
             'name' => 'required',
             'description' => 'required',
-            'company_type_id' => 'required|numeric|exists:company_types,id'
+            'company_type_id' => 'required|numeric|exists:company_types,id',
+            'logo' => 'dimensions:max_width=270,max_height=200'
         ]);
 
         $company->name = $request->name;

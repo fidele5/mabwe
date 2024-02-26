@@ -37,7 +37,7 @@
                                     <div class="row justify-content-center">
                                         <div class="col-12">
                                             <div class="form-group">
-                                                <label for="first-title-floating">Nom</label>
+                                                <label for="first-title-floating">Nom <small class="text-warning text-lowercase text-right" >  <em> (Obligatoire) *</em></small></label>
                                                 <input type="text" value="{{ old('name') }}" id="first-title-floating"
                                                     class="form-control champ @error('name') is-invalid @enderror"
                                                     placeholder="Nom" name="name">
@@ -51,7 +51,7 @@
                                             <div class="form-group">
                                                 <label for="first-title-floating">Telephone</label>
                                                 <input type="text" value="{{ old('phone') }}" id="first-title-floating"
-                                                    class="form-control champ @error('phone') is-invalid @enderror"
+                                                    class="form-control @error('phone') is-invalid @enderror"
                                                     placeholder="Telephone" name="phone">
                                                 @error('phone')
                                                     <small>{{ $message }}</small>
@@ -63,7 +63,7 @@
                                             <div class="form-group">
                                                 <label for="first-title-floating">Email</label>
                                                 <input type="text" value="{{ old('email') }}" id="first-title-floating"
-                                                    class="form-control champ @error('email') is-invalid @enderror"
+                                                    class="form-control @error('email') is-invalid @enderror"
                                                     placeholder="Email" name="email">
                                                 @error('email')
                                                     <small>{{ $message }}</small>
@@ -73,9 +73,9 @@
 
                                         <div class="col-12">
                                             <div class="form-group">
-                                                <label>Type de compagnie</label>
+                                                <label>Type de compagnie <small class="text-warning text-lowercase text-right" >  <em> (Obligatoire) *</em></small></label>
                                                 <select name="company_type_id" id="categorie"
-                                                    class="custom-select @error('company_type_id') is-invalid @enderror">
+                                                    class="custom-select champ @error('company_type_id') is-invalid @enderror">
                                                     @foreach ($companyTypes as $companyType)
                                                         <option value="{{ $companyType->id }}"
                                                             @if (old('company_type_id') == $companyType->id) selected="" @endif>
@@ -90,7 +90,7 @@
 
                                         <div class="col-12">
                                             <fieldset class="form-group mb-0">
-                                                <label for="textarea-counter">Description</label>
+                                                <label for="textarea-counter">Description <small class="text-warning text-lowercase text-right" >  <em> (Obligatoire) *</em></small></label>
                                                 <textarea data-length=20 class="form-control char-textarea champ @error('description') is-invalid @enderror"
                                                     id="textarea-counter" rows="5" name="description" placeholder="Texte">{{ old('description') }}</textarea>
                                                 @error('text')
@@ -118,7 +118,7 @@
                                             <fieldset class="form-group">
                                                 <label for="basicInputFile">Logo <small
                                                         class="text-warning text-lowercase text-right">
-                                                        <em>{{ __('pages.required') }} *</em> </small> </label>
+                                                        <em> 270x200 (Obligatoire) *</em> </small> </label>
                                                 <div class="custom-file">
                                                     <input type="file" value="{{ old('logo') }}"
                                                         class="custom-file-input champ @error('logo') is-invalid @enderror"
@@ -133,7 +133,10 @@
                                         </div>
 
                                         <div class="col-12 form-group file-repeater">
-                                            <label for="textarea-counter">Images</label>
+                                            <label for="textarea-counter">Images <small
+                                                class="text-warning text-lowercase text-right">
+                                                <em> 411x350 </em> </small>
+                                            </label>
 
                                             <div data-repeater-list="repeater_list">
                                                 <div data-repeater-item="">

@@ -1,8 +1,10 @@
 <?php
+
+use App\Models\CompanyAd;
 use App\Models\CompanyType;
 use App\Models\Post;
 use App\Models\PostCategory;
-
+use Carbon\Carbon;
 
 function get_option($option_key)
 {
@@ -22,7 +24,7 @@ function languages()
 
 function get_lastest_news()
 {
-    return Post::orderBy("id", "desc")
+    return Post::inRandomOrder()
     ->take(3)
     ->get();
 }
@@ -33,4 +35,16 @@ function get_company_types(){
 
 function get_categories(){
     return PostCategory::get();
+}
+
+function get_ads(){
+    return CompanyAd::inRandomOrder()
+        ->whereDate("expire_at", "<=", Carbon::today()->toDateString())
+        ->get();
+}
+
+function get_random_ad(){
+    $array  = get_ads();
+    $k = array_rand($array);
+    return $array[$k];
 }
